@@ -52,8 +52,8 @@
                                 <div class="flex gap-4">
                                     <label for="interviewTicket" class="block text-sm font-medium text-gray-700 w-full">Enable Interview Tickets?
                                         <select name="interviewTicket" class="border border-gray-300 rounded-md text-sm mt-2 w-full">
-                                            <option value="1" @if($category->create_interview == 0) selected @endif>Yes</option>
-                                            <option value="0" @if($category->create_interview == 1) selected @endif>No</option>
+                                            <option value="1" @if($category->create_interview == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($category->create_interview == 0) selected @endif>No</option>
                                         </select>
                                     </label>
 

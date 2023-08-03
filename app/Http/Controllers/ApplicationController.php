@@ -124,7 +124,7 @@ class ApplicationController extends Controller
         ]);
 
         $input = $request->all();
-        
+
         //if the new stats are the same as the old ones, do nothing
         if ($application_categories->interview_ticket == $input['interviewTicket'] && $application_categories->interview_ticket_category_id == $input['category']) {
             return redirect()->back()->with('success', 'Application category interview settings changed!');
