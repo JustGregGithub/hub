@@ -62,7 +62,7 @@ class SupportController extends Controller
     }
 
     public function application_support_category(ApplicationCategory $application_categories) {
-        Gate::authorize('is-application-worker-of', $application_categories);
+        Gate::authorize('is-application-worker-of', $application_categories->id);
 
         return view('application.support_applications', [
             'category' => $application_categories,
