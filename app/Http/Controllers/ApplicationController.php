@@ -181,11 +181,18 @@ class ApplicationController extends Controller
         ]);
 
         $input = $request->all();
+        $default = false;
+
+        //check whether a default is already set. If not, create a variable for it
+        if (!ApplicationSection::where('is_default', true)->exists()) {
+            $default = true;
+        }
 
         ApplicationSection::create([
             'name' => $input['name'],
             'colour_left' => $input['colour_left'],
             'colour_right' => $input['colour_right'],
+            'is_default' => $default,
         ]);
 
         return redirect()->back()->with('success', 'Application section created!');

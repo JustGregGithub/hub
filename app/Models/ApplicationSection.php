@@ -13,6 +13,7 @@ class ApplicationSection extends Model
         'name',
         'colour_left',
         'colour_right',
+        'is_default'
     ];
 
     public function applications() {
