@@ -53,6 +53,11 @@ class ApplicationController extends Controller
         $categories = [];
 
         foreach (ApplicationCategory::all() as $category) {
+            if ($request->user()->isManagement()) {
+                $categories[] = $category;
+                continue;
+            }
+
             if ($request->user()->hasDiscordRole($category->manager_role)) {
                 $categories[] = $category;
             }
