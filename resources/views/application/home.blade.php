@@ -34,7 +34,7 @@
                 <div class="mt-5">
                     <h1 class="text-xl font-bold">Available Applications</h1>
                     @foreach ($application_sections as $application_section)
-                        @if($application_section->categories->isNotEmpty())
+                        @if($application_section->categories->where('is_open', true)->isNotEmpty())
                             <div class="mt-5 rounded-xl p-4" style="background: linear-gradient(138deg, {{ $application_section->colour_left }} 27%, {{ $application_section->colour_right }} 100%);">
                                 <p class="font-bold text-lg">{{ $application_section->name }}</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
