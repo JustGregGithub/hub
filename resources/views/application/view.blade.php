@@ -124,7 +124,7 @@
                                 </div>
                             </div>
 
-                            <hr class="mt-5 mb-5">
+                            <hr class="h-px my-8 mt-5 mb-5 bg-gray-200 border-0 dark:bg-gray-700">
                             <p class="text-sm text-gray-400 text-center">What do you think of this application?</p>
                             <div class="flex gap-4 justify-center mt-2">
                                 <button class="bg-green-300 text-green-500 px-2 py-1 rounded-md" data-modal-target="acceptModal" data-modal-toggle="acceptModal">

@@ -39,7 +39,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
                                 @foreach ($application_section->categories as $category)
                                     @if($category->is_open)
-                                        <div class="border rounded-xl p-4 text-center bg-gray-50 h-fit">
+                                        <div class="border rounded-xl p-4 text-center bg-gray-50 dark:bg-slate-600 dark:text-gray-300 dark:border-gray-400 h-fit">
                                             <p>
                                                 {{ $category->name }}
                                             </p>

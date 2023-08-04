@@ -184,7 +184,7 @@
 
                             <input type="submit" value="Submit Changes" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                         </form>
-                        <hr class="mt-4 mb-4">
+                        <hr class="h-px my-8 mt-4 mb-4 bg-gray-200 border-0 dark:bg-gray-700">
                         <form method="POST" action="{{ route('tickets.update.post', $ticket->slug) }}">
                             @csrf
 
