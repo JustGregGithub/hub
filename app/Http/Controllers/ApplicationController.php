@@ -42,6 +42,8 @@ class ApplicationController extends Controller
     }
 
     public function view(Request $request, Application $application) {
+        Gate::authorize('view-application', $application);
+
         return view('application.view', [
             'application' => $application,
         ]);

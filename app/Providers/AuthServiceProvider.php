@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Application;
 use App\Models\ApplicationCategory;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
@@ -105,6 +106,18 @@ class AuthServiceProvider extends ServiceProvider
         /**
          * Application Policies
          */
+
+        Gate::define('view-application', function (User $user, Application $application) {
+            if ($user->isManagement()) return true;
+
+            if ($user->id === $application->user_id) return true;
+
+            if ($user->hasDiscordRole($application->category->manager_role)) return true;
+
+            if ($user->hasDiscordRole($application->category->worker_role)) return true;
+
+            return false;
+        });
 
         Gate::define('is-application-manager-of-any', function (User $user) {
             if ($user->isManagement()) return true;

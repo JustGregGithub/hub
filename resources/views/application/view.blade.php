@@ -136,8 +136,68 @@
                             </div>
                         @endcan
                     @endif
+
+                    @if($application->status != \App\Models\Application::STATUSES['Under Review'])
+                        <div id="changeModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="relative w-full max-w-2xl max-h-full">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <!-- Modal header -->
+                                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                            Change Application Status
+                                        </h3>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="changeModal">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="p-6 space-y-2">
+                                        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Please select a new status for this application.
+                                        </p>
+                                        <form method="POST" action="{{ route('applications.status.patch', $application) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="flex flex-col gap-2">
+                                                <input class="hidden" type="hidden" name="status" value="{{ \App\Models\Application::STATUSES['Denied'] }}">
+                                                <select id="status" name="status" class="w-full border border-gray-300 rounded-md text-sm mt-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    @foreach(\App\Models\Application::STATUSES as $key => $value)
+                                                        @if($value == $application->status)
+                                                            @continue
+                                                        @endif
+                                                        <option value="{{ $value }}">{{ $key }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <textarea id="reason" type="text" name="reason" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hidden">Not enough information</textarea>
+                                            </div>
+                                            <input type="submit" value="Change Application Status" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 text-center">Want to change the status of this application?</p>
+                        <div class="flex gap-4 justify-center mt-2">
+                            <button class="bg-green-300 text-green-500 px-2 py-1 rounded-md" data-modal-target="changeModal" data-modal-toggle="changeModal">
+                                Change Status
+                            </button>
+                        </div>
+
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('status').addEventListener('change', function() {
+            if (this.value == "{{ \App\Models\Application::STATUSES['Denied'] }}") {
+                document.getElementById('reason').classList.remove('hidden')
+            } else {
+                document.getElementById('reason').classList.add('hidden')
+            }
+        })
+    </script>
 </x-app-layout>
