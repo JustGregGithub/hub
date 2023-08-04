@@ -11,7 +11,7 @@
                 <div class="bg-white dark:bg-slate-600 rounded-xl p-4 whitespace-normal break-words dark:text-gray-300">
                     {!! $ticket->content !!}
                 </div>
-                <hr class="mt-4">
+                <hr class="h-px my-8 mt-2 mb-2 bg-gray-200 border-0 dark:bg-gray-700">
                 @foreach($ticket->replies as $reply)
                     @if ($reply->type == app\Models\TicketReply::TYPE_NOTE)
                         @can('can-support', $ticket)
