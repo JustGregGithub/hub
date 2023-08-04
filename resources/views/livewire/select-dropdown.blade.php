@@ -1,6 +1,6 @@
 <div class="mt-2 w-full">
-    <label for="{{ $column }}" class="block text-sm font-medium text-gray-700">{{ $label }}</label>
-    <select name="{{ $column }}" class="border border-gray-300 rounded-md text-sm mt-2 w-full" wire:model="selectedOption">
+    <label for="{{ $column }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $label }}</label>
+    <select name="{{ $column }}" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" wire:model="selectedOption">
         @foreach ($options as $value => $option)
             <option value="{{ $value }}">{{ $option }}</option>
         @endforeach

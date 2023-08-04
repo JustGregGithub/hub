@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="p-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-10">
+            <div class="mb-10 dark:text-gray-400">
                 <h1 class="text-xl font-bold">Hey, <span class="bg-gradient-to-r from-fuchsia-600 to-pink-600 bg-clip-text text-transparent">{{ Auth::user()->getTagAttribute() }}</span> 👋</h1>
                 <p class="mt-1">Let&apos;s see what&apos;s in-store today.</p>
             </div>
-            <div class="bg-white rounded-xl p-4">
-                <h1 class="text-xl font-bold">Quick Actions</h1>
+            <div class="bg-white dark:bg-slate-600 rounded-xl p-4">
+                <h1 class="text-xl font-bold dark:text-gray-400">Quick Actions</h1>
                 <div class="flex flex-wrap gap-4 mt-4">
                     <a href="{{ route('tickets.create') }}" class="bg-purple-200 px-4 py-2 rounded-xl text-purple-600">
                         🎫 Create a Ticket
@@ -23,15 +23,15 @@
                 </div>
             </div>
             <div class="mt-10">
-                <h1 class="text-xl font-bold">My Pinned Tickets</h1>
+                <h1 class="text-xl dark:text-gray-400 font-bold">My Pinned Tickets</h1>
                 @foreach($pinned_tickets as $ticket)
-                    <div class="bg-white rounded-xl p-2 mt-4">
+                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
                         <div class="p-2 flex justify-between items-center">
                             <div class="flex">
                                 <div class="bg-gray-200 rounded-md px-2">#{{ $ticket->id }}</div>
-                                <h2 class="ml-5">
+                                <h2 class="ml-5 dark:text-gray-300">
                                     {{ $ticket->title }}
-                                    <span class="text-gray-500 text-sm">({{\App\Models\Ticket::status($ticket->status)}}) | Last Updated: {{$ticket->updated_at->diffForHumans()}}</span>
+                                    <span class="text-gray-500 dark:text-gray-400 text-sm">({{\App\Models\Ticket::status($ticket->status)}}) | Last Updated: {{$ticket->updated_at->diffForHumans()}}</span>
                                 </h2>
                             </div>
                             <div class="flex gap-4 items-center">
@@ -55,21 +55,21 @@
                     </div>
                 @endforeach
                 @if($pinned_tickets->isEmpty())
-                    <div class="bg-white rounded-xl p-2 mt-4">
-                        <div class="p-2">
+                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                        <div class="p-2 dark:text-gray-300">
                             No Pinned Tickets
                         </div>
                     </div>
                 @endif
             </div>
             <div class="mt-10">
-                <h1 class="text-xl font-bold">My Recent Applications <span class="font-normal text-sm text-gray-500">- Showing {{ count($applications) }} Application(s)</span></h1>
+                <h1 class="text-xl dark:text-gray-400 font-bold">My Recent Applications <span class="font-normal text-sm text-gray-500">- Showing {{ count($applications) }} Application(s)</span></h1>
                 @foreach($applications as $application)
-                    <div class="bg-white rounded-xl p-2 mt-4">
+                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
                         <div class="p-2 flex justify-between">
                             <div class="flex">
                                 <div class="bg-{{ \App\Models\Application::statusForeColor($application->status)  }} rounded-md px-2 text-{{ \App\Models\Application::statusColor($application->status)  }}">{{ \App\Models\Application::status($application->status) }}</div>
-                                <h2 class="ml-5">{{ \App\Models\ApplicationCategory::name($application->application_category_id) }} <small class="text-gray-400">| {{ $application->updated_at->diffForHumans() }}</small></h2>
+                                <h2 class="ml-5 dark:text-gray-300">{{ \App\Models\ApplicationCategory::name($application->application_category_id) }} <small class="text-gray-400 dark:text-gray-400">| {{ $application->updated_at->diffForHumans() }}</small></h2>
                             </div>
                             <div class="flex gap-4">
                                 <a href="{{ route('applications.view', $application->id) }}">
@@ -83,8 +83,8 @@
                     </div>
                 @endforeach
                 @if($applications->isEmpty())
-                    <div class="bg-white rounded-xl p-2 mt-4">
-                        <div class="p-2">
+                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                        <div class="p-2 dark:text-gray-300">
                             No Applications Submitted
                         </div>
                     </div>

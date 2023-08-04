@@ -81,6 +81,7 @@ class Ticket extends Model
             case self::STATUSES['On Hold']:
                 return 'blue-500';
             case self::STATUSES['Closed']:
+            case self::STATUSES['Answered']:
             case self::STATUSES['Escalated']:
             case self::STATUSES['Transferred']:
                 return 'red-500';

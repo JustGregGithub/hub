@@ -6,5 +6,11 @@
         menubar: false,
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
+        skin: window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "oxide-dark"
+            : "oxide",
+        content_css: window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "default",
     });
 </script>

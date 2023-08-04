@@ -1,21 +1,20 @@
 <x-app-layout>
     <div class="p-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray-100 w-full">
-                <div class="mt-10">
+            <div class="mt-10">
                     <div class="flex justify-between">
-                        <h1 class="text-xl font-bold">Create a ticket</h1>
+                        <h1 class="text-xl font-bold dark:text-gray-400">Create a ticket</h1>
                     </div>
-                    <div class="bg-white rounded-xl p-4 mt-4">
+                    <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4">
                         <form method="POST" action="{{ route('tickets.create.post')  }}">
                             @csrf
                             <div class="flex gap-4 w-full">
                                 <div class="w-full">
-                                    <label for="ticketTitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ticket Title</label>
+                                    <label for="ticketTitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Ticket Title</label>
                                     <input type="text" id="ticketTitle" name="title" value="{{ old('title') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="This is my ticket title">
                                 </div>
                                 <div class="w-full">
-                                    <label for="ticketCategory" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ticket Category</label>
+                                    <label for="ticketCategory" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Ticket Category</label>
                                     <select id="ticketCategory" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         @foreach($categories as $category)
                                             @if($category->id != \App\Models\TicketCategory::getDefault()->id && $category->is_hidden != 1)
@@ -35,8 +34,7 @@
                             </button>
                         </form>
                     </div>
-                </div>
-            </div>
+    </div>
         </div>
     </div>
     <x-tiny-mce/>

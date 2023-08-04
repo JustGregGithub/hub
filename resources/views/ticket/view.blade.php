@@ -2,13 +2,13 @@
     <div class="p-12 max-w-7xl mx-auto">
 
         {{--  Heading --}}
-        <h1 class="text-xl font-bold"><span class="text-gray-500">#{{ $ticket->id  }}</span> {{ $ticket->title }}</h1>
+        <h1 class="text-xl font-bold dark:text-gray-400"><span class="text-gray-500 dark:text-gray-600">#{{ $ticket->id  }}</span> {{ $ticket->title }}</h1>
 
         {{-- Content --}}
         <div class="flex flex-wrap lg:flex-nowrap mt-4 gap-4">
             {{-- Left side --}}
             <div class="w-full lg:w-3/4">
-                <div class="bg-white rounded-xl p-4 whitespace-normal break-words">
+                <div class="bg-white dark:bg-slate-600 rounded-xl p-4 whitespace-normal break-words dark:text-gray-300">
                     {!! $ticket->content !!}
                 </div>
                 <hr class="mt-4">
@@ -42,9 +42,8 @@
                                 </div>
                             </div>
                         @endcan
-                        {{-- the creator of the ticket should not be able to see notes --}}
                     @else
-                        <div class="bg-white border border-gray-200 rounded-xl p-4 mt-4">
+                        <div class="bg-white border border-gray-200 dark:bg-slate-600 dark:border-gray-800 rounded-xl p-4 mt-4 dark:text-gray-300">
                             <div class="flex items-center">
                                 <img class="h-12 w-12 rounded-xl object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ $reply->user_id }}/{{ $reply->user->avatar }}.webp" alt="{{ $reply->user->getTagAttribute() }}" />
                                 <div class="flex justify-between w-full">
@@ -80,7 +79,7 @@
                             <div class="mt-2">
                                 {!! $reply->content !!}
                                 @if($reply->user->signature)
-                                    <hr class="mt-2 mb-2">
+                                    <hr class="h-px my-8 mt-2 mb-2 bg-gray-200 border-0 dark:bg-gray-700">
                                     <i class="text-gray-400 text-sm">
                                         {{ $reply->user->signature }}
                                     </i>
@@ -106,7 +105,7 @@
 
             {{-- Right side --}}
             <div class="w-full lg:w-1/4">
-                <div class="bg-white rounded-xl p-4 flex items-center">
+                <div class="bg-white dark:bg-slate-600 dark:text-gray-300 rounded-xl p-4 flex items-center">
                     <img class="h-8 w-8 border border-gray-600 rounded-full object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ $ticket->user->id }}/{{ $ticket->user->avatar }}.webp" alt="{{ Auth::user()->getTagAttribute() }}" />
                     <div>
                         <p class="break-all">{{ $ticket->user->displayName()  }} @if ($ticket->user->discriminator != 0) #{{ $ticket->user->discriminator }} @endif</p>
@@ -114,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white w-full rounded-xl p-4 text-sm mt-2">
+                <div class="bg-white dark:bg-slate-600 dark:text-gray-300 w-full rounded-xl p-4 text-sm mt-2">
                     <div class="text-gray-400">Created At</div>
                     <small>{{ $created_at }}</small>
 
@@ -135,14 +134,14 @@
                 </div>
 
                 @can('is-not-allowed-user', $ticket)
-                    <div class="bg-white w-full rounded-xl p-4 text-sm mt-2">
+                    <div class="bg-white dark:bg-slate-600 w-full rounded-xl p-4 text-sm mt-2">
                         <span class="text-gray-400 mt-4">Ticket Visibility</span>
                         @if($allowed_users->count() > 0)
                             <form method="POST" action="{{ route('tickets.user.delete', $ticket) }}" class="flex gap-2">
                                 @csrf
                                 @method('DELETE')
 
-                                <select name="userid" class="border border-gray-300 rounded-md text-sm mt-2 w-full">
+                                <select name="userid" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     @foreach($allowed_users as $user)
                                         <option value="{{ $user->id }}">{{ $user->displayName() }}</option>
                                     @endforeach
@@ -155,7 +154,7 @@
                         <form method="POST" action="{{ route('tickets.user.patch', $ticket) }}">
                             @csrf
                             @method('PATCH')
-                            <input type="text" name="userid" placeholder="Discord ID" class="border border-gray-300 rounded-md text-sm w-full">
+                            <input type="text" name="userid" placeholder="Discord ID" class="border border-gray-300 rounded-md text-sm w-full mt-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <input type="submit" value="Add Person" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                         </form>
                     </div>
@@ -163,25 +162,25 @@
 
                 {{-- Support Tools --}}
                 @can('can-support', $ticket)
-                    <div class="bg-white w-full rounded-xl p-4 text-sm mt-2">
+                    <div class="bg-white dark:bg-slate-600 w-full rounded-xl p-4 text-sm mt-2">
                         <span class="text-gray-400">Change Category</span>
                         <form method="POST" action="{{ route('tickets.update.post', $ticket->slug) }}" class="flex flex-col">
                             @csrf
-                            <select name="category" class="border border-gray-300 rounded-md text-sm mt-2 w-full">
+                            <select name="category" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach($ticket->categories() as $category)
                                     <option value="{{ $category->id  }}" @if($category->id == $ticket->category->id) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
 
                             <span class="text-gray-400 mt-4">Change Status</span>
-                            <select name="status" class="border border-gray-300 rounded-md text-sm mt-2 w-full">
+                            <select name="status" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach(\app\Models\Ticket::STATUSES as $key=>$value)
                                     <option value="{{ $value  }}" @if($value == $ticket->status) selected @endif> {{ $key     }}</option>
                                 @endforeach
                             </select>
 
                             <span class="text-gray-400 mt-4">Assign Ticket</span>
-                            <input type="text" name="assigned_person" placeholder="Discord ID" class="border border-gray-300 rounded-md text-sm mt-2 w-full">
+                            <input type="text" name="assigned_person" placeholder="Discord ID" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                             <input type="submit" value="Submit Changes" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                         </form>

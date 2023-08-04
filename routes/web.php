@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () { return view('welcome'); });
 
 //redirect / to /home - Temporary
-Route::redirect('/', '/home');
+Route::redirect('/', '/home', 302);
 
 Route::get('/store', function () { return Redirect::to('https://store.lynus.gg'); })->name('store');
 
