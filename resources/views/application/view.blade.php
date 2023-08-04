@@ -25,7 +25,7 @@
                 @endif
                 @if($application->status == \App\Models\Application::STATUSES['Denied'])
                     <div class="mt-5 rounded-xl p-4 dark:bg-slate-600">
-                        <p class="font-bold text-lg">Application Denied - Reason</p>
+                        <p class="font-bold text-lg dark:text-gray-300">Application Denied - Reason</p>
                         <p class="text-sm text-gray-400">
                             {{ $application->reason }}
                         </p>
