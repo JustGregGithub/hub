@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="mt-5">
+                    <hr class="h-px my-8 mt-5 bg-gray-200 border-0 dark:bg-gray-700">
                 @endif
                 @if($application->status == \App\Models\Application::STATUSES['Denied'])
                     <div class="mt-5 rounded-xl p-4 dark:bg-slate-600">
