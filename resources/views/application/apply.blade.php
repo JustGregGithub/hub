@@ -6,11 +6,11 @@
 
                 <div class="mt-5 rounded-xl p-4 bg-white dark:bg-slate-600">
                     <p class="font-bold text-lg dark:text-gray-300">Application Information</p>
-                    <div class="flex items-center dark:text-gray-400">
+                    <div class="dark:text-gray-400">
                         {!! $application->information !!}
                     </div>
 
-                    <hr class="mt-5">
+                    <hr class="h-px my-8 mt-5 mb-5 bg-gray-200 border-0 dark:bg-gray-700">
 
                     <p class="font-bold text-lg dark:text-gray-300 mt-4">Questions</p>
                     <p class="text-sm text-gray-400 dark:text-gray-400">
