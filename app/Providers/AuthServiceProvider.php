@@ -55,7 +55,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            Gate::authorize('is-ticket-owner', $ticket);
+            if ($user->id === $ticket->user_id) {
+                return true;
+            }
 
             return false;
         });
