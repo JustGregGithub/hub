@@ -11,15 +11,29 @@
                     </div>
                 </div>
                 @if(Request::user()->id != $application->user_id)
-                    <div class="mt-5 rounded-xl p-4 dark:bg-slate-600">
-                        <p class="font-bold text-lg dark:text-gray-400">Applicant Information</p>
-                        <div class="flex items-center dark:text-gray-300">
-                            <img class="h-12 w-12 rounded-xl object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ $application->user_id }}/{{ $application->user->avatar }}.webp" alt="{{ $application->user->getTagAttribute() }}" />
-                            <div>
-                                <p class="break-all">{{ $application->user->displayName()  }} @if ($application->user->discriminator != 0) #{{ $application->user->discriminator }} @endif</p>
-                                <p class="text-xs text-gray-400 break-all">{{ $application->user_id  }}</p>
+                    <div class="flex gap-4">
+                        <div class="mt-5 rounded-xl p-4 dark:bg-slate-600 w-full">
+                            <p class="font-bold text-lg dark:text-gray-400">Applicant Information</p>
+                            <div class="flex items-center dark:text-gray-300">
+                                <img class="h-12 w-12 rounded-xl object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ $application->user_id }}/{{ $application->user->avatar }}.webp" alt="{{ $application->user->getTagAttribute() }}" />
+                                <div>
+                                    <p class="break-all">{{ $application->user->displayName()  }} @if ($application->user->discriminator != 0) #{{ $application->user->discriminator }} @endif</p>
+                                    <p class="text-xs text-gray-400 break-all">{{ $application->user_id  }}</p>
+                                </div>
                             </div>
                         </div>
+                        @if($application->status == \App\Models\Application::STATUSES['Accepted'] || $application->status == \App\Models\Application::STATUSES['Denied'])
+                            <div class="mt-5 rounded-xl p-4 dark:bg-slate-600 w-full">
+                                <p class="font-bold text-lg dark:text-gray-400">{{ \App\Models\Application::status($application->status) }} By</p>
+                                <div class="flex items-center dark:text-gray-300">
+                                    <img class="h-12 w-12 rounded-xl object-cover mr-2" src="https://cdn.discordapp.com/avatars/{{ $application->worker_id }}/{{ \App\Models\User::info(($application->worker_id))->avatar }}.webp" alt="{{ \App\Models\User::info(($application->worker_id))->username }}" />
+                                    <div>
+                                        <p class="break-all">{{ \App\Models\User::info(($application->worker_id))->username }} @if (\App\Models\User::info(($application->worker_id))->discriminator != 0) #{{ \App\Models\User::info(($application->worker_id))->discriminator }} @endif</p>
+                                        <p class="text-xs text-gray-400 break-all">{{ $application->worker_id  }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <hr class="h-px my-8 mt-5 bg-gray-200 border-0 dark:bg-gray-700">
                 @endif

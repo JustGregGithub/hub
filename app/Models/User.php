@@ -82,6 +82,12 @@ class User extends Authenticatable
         return $this->global_name?? $this->username;
     }
 
+
+
+    public static function info($id) {
+        return self::findOrFail($id);
+    }
+
     public function hasDiscordRole($roleid) {
         $discord_guild_id = env("DISCORD_GUILD_ID");
 

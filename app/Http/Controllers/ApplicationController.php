@@ -445,13 +445,13 @@ class ApplicationController extends Controller
         $application->save();
 
         if ($application->status == Application::STATUSES['Denied']) {
-            $message = 'Please check your application for more information.';
+            $message = 'Please check your application for more information. Denied by ' . $user->displayName() . '.';;
             $colour = '#ff0000';
         } else if ($application->status == Application::STATUSES['Accepted']) {
             $colour = '#00ff00';
 
             if ($category->create_interview) {
-                $message = 'Congratulations! You have been accepted! An interview request has been sent to you in the form of a ticket.';
+                $message = 'Congratulations! You have been accepted! An interview request has been sent to you in the form of a ticket. Accepted by <@' . $user->id . '>!';;
                 $ticket = Ticket::create([
                     'user_id' => $application->user_id,
                     'category_id' => $category->interview_category,
@@ -463,8 +463,11 @@ class ApplicationController extends Controller
                 $ticket->slug = $ticket->makeSlug();
                 $ticket->save();
             } else {
-                $message = 'Congratulations! You have been accepted!';
+                $message = 'Congratulations! You have been accepted by <@' . $user->id . '>!';
             }
+        } else if ($application->status == Application::STATUSES['Under Review']) {
+            $message = 'Your application is now under review by <@' . $user->id . '>!';;
+            $colour = '#ffff00';
         }
 
         DiscordAlert::message('<@' . $application->user_id . '>', [
