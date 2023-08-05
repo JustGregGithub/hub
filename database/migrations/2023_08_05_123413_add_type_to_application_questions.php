@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('application_questions', function (Blueprint $table) {
-            $table->integer('type')->default(ApplicationQuestion::OPTION_TYPES['input'])->after('question');
+            $table->integer('type')->default(ApplicationQuestion::OPTION_TYPES['Input'])->after('question');
         });
     }
 
