@@ -165,7 +165,7 @@
                                                     @csrf
                                                     @method('PATCH')
                                                     <input type="text" name="question_id" placeholder="Question" class="border border-gray-300 rounded-md text-sm hidden" value="{{ $question->id }}" hidden>
-                                                    <input type="text" name="position" placeholder="Position" class="border border-gray-300 rounded-md text-sm w-full">
+                                                    <input type="text" name="position" placeholder="Position" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     <input type="submit" value="Move Question" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                                 </form>
                                             </div>
@@ -195,13 +195,58 @@
                                                     @csrf
                                                     @method('PATCH')
                                                     <input type="text" name="question_id" placeholder="Question" class="border border-gray-300 rounded-md text-sm hidden" value="{{ $question->id }}" hidden>
-                                                    <input type="text" name="question" placeholder="Question Name" class="border border-gray-300 rounded-md text-sm w-full">
+                                                    <input type="text" name="question" placeholder="Question Name" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     <input type="submit" value="Rename Question" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div id="typeModal-{{ $question->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-2xl max-h-full">
+                                        <!-- Modal content -->
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <!-- Modal header -->
+                                            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                    Change Question Type
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="renameModal-{{ $question->id }}">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="p-6 space-y-2">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Please select the type of the question and fill in any necessary information. If you'd like to change the pre-existing inputs (e.g existing select), you will need to input the same information in the respective order with the changes.</p>
+                                                <form method="POST" action="{{ route('applications.settings.question.type', $category->id) }}">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="text" name="question_id" placeholder="Question" class="border border-gray-300 rounded-md text-sm hidden" value="{{ $question->id }}" hidden>
+                                                    <select name="type" id="type-{{ $question->id }}" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        @foreach(\App\Models\ApplicationQuestion::OPTION_TYPES as $key=>$value)
+                                                            <option value="{{ $value }}" @if($question->type == $value) selected @endif>{{ $key }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    <div id="options-{{ $question->id }}" @if(!in_array($question->type, [\App\Models\ApplicationQuestion::OPTION_TYPES['Select'], \App\Models\ApplicationQuestion::OPTION_TYPES['Radio']])) class="hidden" @else class="block" @endif >
+                                                        <div id="inputContainer-{{ $question->id }}"></div>
+                                                        <div id="buttons-{{ $question->id }}">
+                                                            <button type="button" onclick="addInputField_{{$question->id}}()" class="bg-green-500 hover:bg-green-400 transition px-4 py-2 rounded-md">Add Input</button>
+                                                            <button type="button" onclick="removeInputField_{{$question->id}}()" class="bg-red-500 hover:bg-red-400 transition px-4 py-2 rounded-md">Remove Input</button>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <input type="submit" value="Set Question Type" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div id="deleteModal-{{ $question->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative w-full max-w-2xl max-h-full">
                                         <!-- Modal content -->
@@ -252,6 +297,9 @@
                                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="renameModal-{{ $question->id }}" data-modal-toggle="renameModal-{{ $question->id }}">Rename</a>
                                             </li>
                                             <li>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="typeModal-{{ $question->id }}" data-modal-toggle="typeModal-{{ $question->id }}">Change Type</a>
+                                            </li>
+                                            <li>
                                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-red-500" data-modal-target="deleteModal-{{ $question->id }}" data-modal-toggle="deleteModal-{{ $question->id }}">Delete</a>
                                             </li>
                                         </ul>
@@ -264,4 +312,48 @@
             </div>
         </div>
     </div>
+    <script>
+        @foreach($category->questions as $question)
+            document.getElementById('type-{{$question->id}}').addEventListener('change', function () {
+                let value = this.value;
+                value = parseInt(value);
+
+                if (value === {{ \App\Models\ApplicationQuestion::OPTION_TYPES['Select'] }} || value === {{ \App\Models\ApplicationQuestion::OPTION_TYPES['Radio'] }}) {
+                    document.getElementById('options-{{$question->id}}').classList.remove('hidden');
+                    document.getElementById('buttons-{{$question->id}}').classList.add('mt-2');
+
+
+                    console.log('show')
+                } else {
+                    document.getElementById('options-{{$question->id}}').classList.add('hidden');
+                    document.getElementById('buttons-{{$question->id}}').classList.remove('mt-2');
+                    console.log('hide')
+                }
+            })
+
+            function addInputField_{{ $question->id }}() {
+                const inputContainer = document.getElementById('inputContainer-{{$question->id}}');
+                const inputCount = inputContainer.children.length + 1;
+
+                const newInput = document.createElement('input');
+                newInput.type = 'text';
+                newInput.name = 'input[' + inputCount + ']'; // Use an index for numeric keys
+                newInput.placeholder = 'Option ' + inputCount;
+                newInput.className = 'border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+
+                inputContainer.appendChild(newInput);
+            }
+
+            // Function to remove an input field
+            function removeInputField_{{ $question->id }}() {
+                const inputContainer = document.getElementById('inputContainer');
+                if (inputContainer.children.length > 1) {
+                    inputContainer.removeChild(inputContainer.lastChild);
+                }
+            }
+
+            // Make 1 input field on page load
+            addInputField_{{ $question->id }}();
+        @endforeach
+    </script>
 </x-app-layout>

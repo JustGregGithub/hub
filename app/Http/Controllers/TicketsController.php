@@ -278,7 +278,7 @@ class TicketsController extends Controller
         $createdat = (new Carbon($ticket->created_at))->format('m/d/Y H:i');
         $updatedat = (new Carbon($ticket->updated_at))->format('m/d/Y H:i');
 
-        $allowed_users = User::whereIn('id', json_decode($ticket->allowed_users, true))->get();
+        $allowed_users = User::whereIn('id', $ticket->allowed_users)->get();
 
         return view('ticket.view', [
             'ticket' => $ticket,

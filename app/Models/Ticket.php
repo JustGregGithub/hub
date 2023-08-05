@@ -23,6 +23,10 @@ class Ticket extends Model
         'priority'
     ];
 
+    protected $casts = [
+        'allowed_users' => 'array'
+    ];
+
     CONST DEFAULT_STATUS = 'Open';
     const STATUSES = [
         'Open' => 10,

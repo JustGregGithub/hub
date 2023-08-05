@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\ApplicationCategory;
+use App\Models\ApplicationQuestion;
 use App\Models\ApplicationSection;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
@@ -372,6 +373,39 @@ class ApplicationController extends Controller
         return redirect()->route('applications.settings.edit', $application_categories->id)->with('success', 'Question renamed!');
     }
 
+    public function patch_type_question(Request $request, ApplicationCategory $application_categories)
+    {
+        Gate::authorize('is-application-manager-of', $application_categories);
+        $input = $request->all();
+        $positionedInputs = [];
+
+        $request->validate([
+            'question_id' => 'required|string',
+            'type' => 'required|string',
+        ]);
+
+        if ($request->type == ApplicationQuestion::OPTION_TYPES['Select'] || $request->type == ApplicationQuestion::OPTION_TYPES['Radio']) {
+            $request->validate([
+                'input.*' => 'required|string',
+            ]);
+
+            $position = 1;
+
+            foreach ($input['input'] as $option) {
+                $positionedInputs[$option] = $position;
+                $position++;
+            }
+        }
+
+        $question = $application_categories->questions()->where('id', $input['question_id'])->first();
+        $question->type = $input['type'];
+        $question->options = $positionedInputs;
+        $question->save();
+
+        return redirect()->route('applications.settings.edit', $application_categories->id)->with('success', 'Question type changed!');
+
+    }
+
     public function delete_delete_question(Request $request, ApplicationCategory $application_categories) {
         Gate::authorize('is-application-manager-of', $application_categories);
 
@@ -402,14 +436,25 @@ class ApplicationController extends Controller
     public function post_apply(Request $request, ApplicationCategory $application_categories) {
         $user = $request->user();
         $input = $request->all();
+        $validationRules = [];
 
         if (Application::where('user_id', $user->id)->where('application_category_id', $application_categories->id)->where('status', Application::STATUSES['Under Review'])->first()) {
             return redirect()->back()->withErrors('You have already applied for this category!');
         }
 
-        $request->validate([
-            'questions.*' => 'required',
-        ]);
+        foreach ($application_categories->questions()->get() as $question) {
+            switch ($question->type) {
+                case ApplicationQuestion::OPTION_TYPES['Input'] || ApplicationQuestion::OPTION_TYPES['Textarea']:
+                    $validationRules["questions.{$question->id}"] = 'required|string';
+                    break;
+
+                case ApplicationQuestion::OPTION_TYPES['Radio'] || ApplicationQuestion::OPTION_TYPES['Select']:
+                    $validationRules["questions.{$question->id}"] = 'required';
+                    break;
+            }
+        }
+
+        $request->validate($validationRules);
 
         Application::create([
             'user_id' => $user->id,

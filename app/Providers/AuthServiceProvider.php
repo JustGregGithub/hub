@@ -42,13 +42,7 @@ class AuthServiceProvider extends ServiceProvider
          * Ticket Policies
          */
         Gate::define('view-ticket', function (User $user, Ticket $ticket) {
-            $allowedUsers = json_decode($ticket->allowed_users);
-
-            if($user->hasDiscordRole($ticket->category->role)) {
-                return true;
-            }
-
-            if (in_array($user->id, (array)$allowedUsers)) {
+            if ($user->id === $ticket->user_id) {
                 return true;
             }
 
@@ -56,7 +50,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ($user->id === $ticket->user_id) {
+            if($user->hasDiscordRole($ticket->category->role)) {
+                return true;
+            }
+
+            if (in_array($user->id, $ticket->allowed_users)) {
                 return true;
             }
 
@@ -68,9 +66,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-not-allowed-user', function (User $user, Ticket $ticket) {
-            $allowedUsers = json_decode($ticket->allowed_users);
 
-            if (in_array($user->id, (array)$allowedUsers)) {
+            if (in_array($user->id, $ticket->allowed_users)) {
                 return false;
             }
 

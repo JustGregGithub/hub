@@ -33,7 +33,7 @@
                                         Last Updated
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Action
+                                        Actions
                                     </th>
                                 </tr>
                                 </thead>
@@ -53,8 +53,8 @@
                                             <td class="px-6 py-4">
                                                 {{ $ticket->updated_at->diffForHumans() }}
                                             </td>
-                                            <td class="px-6 py-4 text-right">
-                                                <a href="{{ route('tickets.view', $ticket->slug) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-blue-500">View</a>
+                                            <td class="px-6 py-4">
+                                                <a href="{{ route('tickets.view', $ticket->slug) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-gray-200">View</a>
                                             </td>
                                         </tr>
                                     @endif
@@ -84,7 +84,7 @@
                                             Last Updated
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Action
+                                            Actions
                                         </th>
                                     </tr>
                                     </thead>
@@ -104,8 +104,8 @@
                                                 <td class="px-6 py-4">
                                                     {{ $ticket->updated_at->diffForHumans() }}
                                                 </td>
-                                                <td class="px-6 py-4 text-right">
-                                                    <a href="{{ route('tickets.view', $ticket->slug) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-blue-500">View</a>
+                                                <td class="px-6 py-4">
+                                                    <a href="{{ route('tickets.view', $ticket->slug) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-gray-200">View</a>
                                                 </td>
                                             </tr>
                                         @endif

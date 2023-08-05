@@ -34,7 +34,7 @@
                                             Last Updated
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            <span class="sr-only">View</span>
+                                            Actions
                                         </th>
                                     </tr>
                                     </thead>
@@ -54,8 +54,8 @@
                                                     <td class="px-6 py-4">
                                                         {{ $application->updated_at->diffForHumans() }}
                                                     </td>
-                                                    <td class="px-6 py-4 text-right">
-                                                        <a href="{{ route('applications.view', $application->id) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-blue-500">View</a>
+                                                    <td class="px-6 py-4">
+                                                        <a href="{{ route('applications.view', $application->id) }}" class="font-medium bg-blue-500 hover:bg-blue-600 transition text-white rounded-md px-4 py-2 dark:text-gray-200">View</a>
                                                     </td>
                                                 </tr>
                                             @endif

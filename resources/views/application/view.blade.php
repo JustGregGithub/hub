@@ -49,7 +49,7 @@
                     <p class="font-bold text-lg dark:text-gray-300">Application Information</p>
 
                     <div class="dark:text-gray-400">
-                        {!! \App\Models\ApplicationCategory::information($application->id) !!}
+                        {!! \App\Models\ApplicationCategory::information($application->application_category_id) !!}
                     </div>
 
                     <hr class="h-px my-8 mt-5 mb-5 bg-gray-200 border-0 dark:bg-gray-700">
@@ -129,7 +129,7 @@
                                                 @method('PATCH')
                                                 <div class="flex gap-2">
                                                     <input class="hidden" type="hidden" name="status" value="{{ \App\Models\Application::STATUSES['Denied'] }}">
-                                                    <textarea type="text" name="reason" class="border border-gray-300 rounded-md text-sm w-full">Not enough information</textarea>
+                                                    <textarea type="text" name="reason" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Not enough information</textarea>
                                                 </div>
                                                 <input type="submit" value="Deny Application" class="bg-red-500 hover:bg-red-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                             </form>

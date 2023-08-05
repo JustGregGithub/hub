@@ -23,12 +23,48 @@
                                 <p class="dark:text-gray-300">
                                     {{ $question->position }}. {{ $question->question }}
                                 </p>
-                                <input
-                                    type="text"
-                                    class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    name="questions[{{ $question->id }}]"
-                                    value="{{ old('questions.'.$question->id) }}"
-                                >
+
+                                @switch($question->type)
+                                    @case(\App\Models\ApplicationQuestion::OPTION_TYPES['Input'])
+                                        <input
+                                            type="text"
+                                            class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            name="questions[{{ $question->id }}]"
+                                            value="{{ old('questions.'.$question->id) }}"
+                                        >
+                                        @break
+                                    @case(\App\Models\ApplicationQuestion::OPTION_TYPES['Textarea'])
+                                        <textarea
+                                            class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            name="questions[{{ $question->id }}]"
+                                        >{{ old('questions.'.$question->id) }}</textarea>
+                                        @break
+                                    @case(\App\Models\ApplicationQuestion::OPTION_TYPES['Select'])
+                                        <select
+                                            class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            name="questions[{{ $question->id }}]"
+                                        >
+                                            @foreach ($question->options as $key => $value)
+                                                <option value="{{ $key }}" {{ old('questions.'.$value) == $value ? 'selected' : '' }}>{{ $key }}</option>
+                                            @endforeach
+                                        </select>
+                                        @break
+                                    @case(\App\Models\ApplicationQuestion::OPTION_TYPES['Radio'])
+                                        <div class="flex flex-col gap-2">
+                                            @foreach ($question->options as $key => $value)
+                                                <div>
+                                                    <input type="radio"
+                                                           id="radio-{{ $value }}"
+                                                           name="questions[{{ $question->id }}]"
+                                                           value="{{ $key }}" class="dark:bg-gray-700 dark:checked:bg-blue-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                                                    {{ old('questions.'.$question->id) == $value ? 'checked' : '' }}
+                                                    >
+                                                    <label for="radio-{{ $value }}" class="dark:text-gray-400">{{ $key }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        @break
+                                @endswitch
                             </div>
                         @endforeach
                         <input type="submit" value="Submit Application" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">

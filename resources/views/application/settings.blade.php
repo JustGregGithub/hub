@@ -28,10 +28,10 @@
                                 </p>
                                 <form method="POST" action="{{ route('applications.settings.section.create') }}">
                                     @csrf
-                                    <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full">
-                                    <div class="flex gap-4 mt-2">
-                                        <input type="text" name="colour_left" class="border border-gray-300 rounded-md text-sm" data-coloris>
-                                        <input type="text" name="colour_right" class="border border-gray-300 rounded-md text-sm" data-coloris>
+                                    <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <div class="flex gap-4 mt-2 justify-center">
+                                        <input type="text" name="colour_left" class="border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" data-coloris>
+                                        <input type="text" name="colour_right" class="border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" data-coloris>
                                     </div>
                                     <input type="submit" value="Add application" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                 </form>
@@ -56,7 +56,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Rename Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createSectionModal">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="renameModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -70,7 +70,7 @@
                                         <form method="POST" action="{{ route('applications.settings.section.rename', $section->id) }}">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full">
+                                            <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <input type="submit" value="Add application" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                         </form>
                                     </div>
@@ -102,11 +102,8 @@
                                             @csrf
                                             @method('PATCH')
                                             <div class="flex gap-4 justify-center">
-                                                <input type="text" name="colour_left" class="border border-gray-300 rounded-md text-sm" value="{{ $section->colour_left }}" data-coloris>
-                                                <input type="text" name="colour_right" class="border border-gray-300 rounded-md text-sm" value="{{ $section->colour_right }}" data-coloris>
-
-                                                {{--                                                    <input type="text" name="colour_left" placeholder="Colour From" class="border border-gray-300 rounded-md text-sm w-full" value="{{ $section->colour_left }}">--}}
-                                                {{--                                                    <input type="text" name="colour_right" placeholder="Colour To" class="border border-gray-300 rounded-md text-sm w-full" value="{{ $section->colour_right }}">--}}
+                                                <input type="text" name="colour_left" class="border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $section->colour_left }}" data-coloris>
+                                                <input type="text" name="colour_right" class="border border-gray-300 rounded-md text-sm dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $section->colour_right }}" data-coloris>
                                             </div>
                                             <input type="submit" value="Set Colours" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                         </form>
@@ -123,7 +120,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Set Default Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createSectionModal">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -151,7 +148,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Delete Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createSectionModal">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -233,12 +230,12 @@
                                     <form method="POST" action="{{ route('applications.settings.application.create') }}">
                                         @csrf
                                         <div class="flex gap-2">
-                                            <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full">
-                                            <input type="text" name="description" placeholder="Description" class="border border-gray-300 rounded-md text-sm w-full">
+                                            <input type="text" name="name" placeholder="Name" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <input type="text" name="description" placeholder="Description" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         </div>
                                         <div class="flex gap-2 mt-2">
-                                            <input type="text" name="manager_role" placeholder="Manager Discord ID" class="border border-gray-300 rounded-md text-sm w-full">
-                                            <input type="text" name="worker_role" placeholder="Worker Discord ID" class="border border-gray-300 rounded-md text-sm w-full">
+                                            <input type="text" name="manager_role" placeholder="Manager Discord ID" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <input type="text" name="worker_role" placeholder="Worker Discord ID" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         </div>
                                         <input type="submit" value="Add application" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer">
                                     </form>

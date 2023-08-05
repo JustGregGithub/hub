@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create/{application_categories:id}',     [ApplicationController::class, 'post_create_question'])   ->name('applications.settings.question.create');
             Route::patch('/move/{application_categories:id}',      [ApplicationController::class, 'patch_move_question'])    ->name('applications.settings.question.move');
             Route::patch('/rename/{application_categories:id}',    [ApplicationController::class, 'patch_rename_question'])    ->name('applications.settings.question.rename');
+            Route::patch('/type/{application_categories:id}',      [ApplicationController::class, 'patch_type_question'])    ->name('applications.settings.question.type');
             Route::delete('/delete/{application_categories:id}',   [ApplicationController::class, 'delete_delete_question'])    ->name('applications.settings.question.delete');
         });
     });
