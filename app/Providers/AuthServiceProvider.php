@@ -50,7 +50,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if($user->hasDiscordRole($ticket->category->role)) {
+            if($user->hasDiscordRole($ticket->category->guild, $ticket->category->role)) {
                 return true;
             }
 
@@ -79,7 +79,7 @@ class AuthServiceProvider extends ServiceProvider
 
             if ($user->id === $ticket->user_id) return false;;
 
-            if($user->hasDiscordRole($ticket->category->role)) return true;
+            if($user->hasDiscordRole($ticket->category->guild, $ticket->category->role)) return true;
 
             return false;
         });
@@ -88,7 +88,7 @@ class AuthServiceProvider extends ServiceProvider
             $categories = TicketCategory::all();
 
             foreach ($categories as $category) {
-                if ($user->hasDiscordRole($category->role)) {
+                if ($user->hasDiscordRole($category->guild, $category->role)) {
                     return true;
                 }
             }
@@ -97,7 +97,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('has-category-role', function (User $user, TicketCategory $category) {
-            return $user->hasDiscordRole($category->role);
+            return $user->hasDiscordRole($category->guild, $category->role);
         });
 
         /**
@@ -109,9 +109,9 @@ class AuthServiceProvider extends ServiceProvider
 
             if ($user->id === $application->user_id) return true;
 
-            if ($user->hasDiscordRole($application->category->manager_role)) return true;
+            if ($user->hasDiscordRole($application->category->guild, $application->category->manager_role)) return true;
 
-            if ($user->hasDiscordRole($application->category->worker_role)) return true;
+            if ($user->hasDiscordRole($application->category->guild, $application->category->worker_role)) return true;
 
             return false;
         });
@@ -121,7 +121,7 @@ class AuthServiceProvider extends ServiceProvider
 
             $categories = ApplicationCategory::all();
             foreach ($categories as $category) {
-                if ($user->hasDiscordRole($category->manager_role)) {
+                if ($user->hasDiscordRole($category->guild, $category->manager_role)) {
                     return true;
                 }
             }
@@ -132,7 +132,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('is-application-manager-of', function (User $user, ApplicationCategory $category) {
             if ($user->isManagement()) return true;
 
-            return $user->hasDiscordRole($category->manager_role);
+            return $user->hasDiscordRole($category->guild, $category->manager_role);
         });
 
         Gate::define('is-application-worker-of-any', function (User $user) {
@@ -140,7 +140,7 @@ class AuthServiceProvider extends ServiceProvider
 
             $categories = ApplicationCategory::all();
             foreach ($categories as $category) {
-                if ($user->hasDiscordRole($category->worker_role)) {
+                if ($user->hasDiscordRole($category->guild, $category->worker_role)) {
                     return true;
                 }
             }
@@ -153,9 +153,9 @@ class AuthServiceProvider extends ServiceProvider
 
             $category = ApplicationCategory::findOrFail($categoryId);
 
-            if ($user->hasDiscordRole($category->manager_role)) return true;
+            if ($user->hasDiscordRole($category->guild, $category->manager_role)) return true;
 
-            return $user->hasDiscordRole($category->worker_role);
+            return $user->hasDiscordRole($category->guild, $category->worker_role);
         });
 
     }

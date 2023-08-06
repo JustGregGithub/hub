@@ -88,11 +88,9 @@ class User extends Authenticatable
         return self::findOrFail($id);
     }
 
-    public function hasDiscordRole($roleid) {
-        $discord_guild_id = env("DISCORD_GUILD_ID");
-
-        if( isset($this->roles[$discord_guild_id]) ) {
-            if(in_array($roleid, $this->roles[$discord_guild_id])) {
+    public function hasDiscordRole($guild, $roleid) {
+        if( isset($this->roles[$guild]) ) {
+            if(in_array($roleid, $this->roles[$guild])) {
                 return true;
             }
         }
@@ -100,16 +98,14 @@ class User extends Authenticatable
     }
 
     public function getDiscordRoles() {
-        $discord_guild_id = env("DISCORD_GUILD_ID");
-
-        return $this->roles[$discord_guild_id]?? null;
+        return $this->roles;
     }
 
     public function isManagement() {
-        return $this->hasDiscordRole(env('DISCORD_ROLE_MGMT'));
+        return $this->hasDiscordRole(env('DISCORD_GUILD_ID'), env('DISCORD_ROLE_MGMT'));
     }
 
     public function isOwner() {
-        return $this->hasDiscordRole(env('DISCORD_ROLE_OWNER'));
+        return $this->hasDiscordRole(env('DISCORD_GUILD_ID'), env('DISCORD_ROLE_OWNER'));
     }
 }

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TicketCategory extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'name',
+        'guild',
         'role',
         'is_hidden'
     ];

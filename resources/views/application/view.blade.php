@@ -101,10 +101,11 @@
                         </div>
                     @endforeach
 
-                    <p class="text-sm text-gray-400 text-center mt-4">Please note that the AI Checker is not 100% accurate and may display false positives. Please take caution when handling applications.</p>
 
                     @if($application->status != \App\Models\Application::STATUSES['Denied'] && $application->status != \App\Models\Application::STATUSES['Accepted'] && Request::user()->id != $application->user_id)
                         @can('is-application-worker-of', $application->application_category_id)
+                            <p class="text-sm text-gray-400 text-center mt-4">Please note that the AI Checker is not 100% accurate and may display false positives. Please take caution when handling applications.</p>
+
                             <div id="acceptModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative w-full max-w-2xl max-h-full">
                                     <!-- Modal content -->

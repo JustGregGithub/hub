@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Faker\Core\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ApiController extends Controller
@@ -13,16 +14,33 @@ class ApiController extends Controller
     // For use with discord bot.
     public function post_discord_roles(Request $request, User $user)
     {
-        $body = $request->getContent();
-        $json = json_decode($body, true);
-        $guild = env("DISCORD_GUILD_ID");
+        $body = $request->all();
 
-        // override all rode data and only save for configured guild.
-        $user->update([
-            'roles' => [$guild => $json]
+        $validator = Validator::make($request->all(), [
+            'guild' => 'required',
+            'roles' => 'required|json',
         ]);
 
-        // reply some info thats actually useful.
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $json = json_decode($body['roles'], true);
+        $guild = $body['guild'];
+        $currentRoles = $user->roles;
+
+        if (!isset($currentRoles[$guild])) {
+            $currentRoles[$guild] = [];
+        }
+
+        $currentRoles[$guild] = $json;
+
+        $user->roles = $currentRoles;
+        $user->save();
+
         return response()->json([
             'success' => true,
             'guild' => $guild,

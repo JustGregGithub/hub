@@ -63,8 +63,8 @@ Route::middleware('auth')->group(function () {
      */
     Route::prefix('/ticketsettings')->group(function () {
         Route::get('/',                                            [TicketsController::class, 'settings'])          ->name('tickets.settings');
-        Route::delete('/category',                                 [TicketsController::class, 'delete_category'])   ->name('tickets.category.delete');
         Route::patch('/category',                                  [TicketsController::class, 'patch_category'])    ->name('tickets.category.patch');
+        Route::delete('/category',                                 [TicketsController::class, 'delete_category'])   ->name('tickets.category.delete');
     });
 
     Route::prefix('/applicationsettings')->group(function () {

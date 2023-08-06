@@ -20,11 +20,22 @@ class SupportController extends Controller
         Gate::authorize('has-any-category-role');
 
         $user = $request->user();
+        $user_categories = [];
 
-        if ($user->isManagement()) {
-            $user_categories = TicketCategory::all();
+        if (!$user->isManagement()) {
+            foreach ($user->getDiscordRoles() as $guildId => $roles) {
+                foreach ($roles as $role) {
+                    // Check if there are any categories that match the current guild and role
+                    $matchingCategories = TicketCategory::where('guild', $guildId)
+                        ->where('role', $role)
+                        ->get();
+
+                    // Add the matching categories to the user_categories array
+                    $user_categories = array_merge($user_categories, $matchingCategories->all());
+                }
+            }
         } else {
-            $user_categories = TicketCategory::whereIn('role', $user->getDiscordRoles())->get();
+            $user_categories = TicketCategory::all();
         }
 
         return view('ticket.support', [

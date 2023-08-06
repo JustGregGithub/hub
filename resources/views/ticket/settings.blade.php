@@ -34,7 +34,10 @@
 
                             <div class="w-full xl:w-6/12 p-2">
                                 <input type="text" placeholder="New Name" id="newname" name="newname" value="{{ old('newname') }}" class="w-full block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="50" disabled="1">
-                                <input type="text" placeholder="Discord Role ID" id="role" name="role" value="{{ old('role') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
+                                <div class="flex gap-4">
+                                    <input type="text" placeholder="Discord Guild ID" id="guild" name="guild" value="{{ old('guild') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
+                                    <input type="text" placeholder="Discord Role ID" id="role" name="role" value="{{ old('role') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
+                                </div>
                                 <div class="flex items-center mt-2">
                                     <div id="tooltip-hidden-user" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-700 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Whether the category will be selectable when creating a ticket
@@ -75,6 +78,9 @@
                                 Category Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Linked Discord Guild ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Linked Discord Role ID
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -89,6 +95,9 @@
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $category->name }}
                                     </th>
+                                    <td class="px-6 py-4">
+                                        {{ $category->guild }}
+                                    </td>
                                     <td class="px-6 py-4">
                                         {{ $category->role }}
                                     </td>
@@ -118,12 +127,14 @@
                 document.getElementById('save').disabled = true;
                 document.getElementById('newname').disabled = true;
                 document.getElementById('role').disabled = true;
+                document.getElementById('guild').disabled = true;
                 document.getElementById('hidden').disabled = true;
             } else {
                 document.getElementById('delete').disabled = false;
                 document.getElementById('save').disabled = false;
                 document.getElementById('newname').disabled = false;
                 document.getElementById('role').disabled = false;
+                document.getElementById('guild').disabled = false;
                 document.getElementById('hidden').disabled = false;
             }
 

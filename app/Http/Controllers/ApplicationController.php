@@ -62,7 +62,7 @@ class ApplicationController extends Controller
                 continue;
             }
 
-            if ($request->user()->hasDiscordRole($category->manager_role)) {
+            if ($request->user()->hasDiscordRole($category->guild, $category->manager_role)) {
                 $categories[] = $category;
             }
         }

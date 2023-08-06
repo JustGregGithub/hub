@@ -297,6 +297,7 @@ class TicketsController extends Controller
             'category' => 'required',
             'newname' => 'required_if:category,new|max:100',
             'role' => 'required_if:category,new',
+            'guild' => 'required_if:category,new',
             'isHidden' => 'boolean|nullable'
         ]);
 
@@ -304,6 +305,8 @@ class TicketsController extends Controller
         $isHidden = 0;
 
         if($input['role']) $request->validate(['role' => 'numeric|min_digits:17|max_digits:20']);
+        if($input['guild']) $request->validate(['guild' => 'numeric|min_digits:17|max_digits:20']);
+
         if (isset($input['isHidden'])) {
             $isHidden = 1;
         }
@@ -314,6 +317,7 @@ class TicketsController extends Controller
             TicketCategory::create([
                 'role' => $input['role'],
                 'name' => $input['newname'],
+                'guild' => $input['guild'],
                 'is_hidden' => $isHidden
             ]);
 
@@ -327,6 +331,7 @@ class TicketsController extends Controller
 
         if ($input['newname']) $category->name = $input['newname'];
         if ($input['role']) $category->role = $input['role'];
+        if ($input['guild']) $category->guild = $input['guild'];
         $category->is_hidden = $isHidden;
 
         $category->save();

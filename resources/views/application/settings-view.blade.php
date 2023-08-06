@@ -68,11 +68,14 @@
                             <input type="submit" value="Submit Interview Changes" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer mt-4">
                         </form>
                         <div>
-                            <div class="flex gap-4 items-baseline">
-                                @can('is-mgmt')
-                                    <livewire:input-box :model="$category" column="manager_role" label="Manager Role ID" />
-                                @endcan
-                                <livewire:input-box :model="$category" column="worker_role" label="Worker Role ID" />
+                            <div class="flex flex-col justify-center">
+                                <livewire:input-box :model="$category" column="guild" label="Guild ID" />
+                                <div class="flex gap-4 items-baseline">
+                                    @can('is-mgmt')
+                                        <livewire:input-box :model="$category" column="manager_role" label="Manager Role ID" />
+                                    @endcan
+                                    <livewire:input-box :model="$category" column="worker_role" label="Worker Role ID" />
+                                </div>
                             </div>
                             @can('is-mgmt')
                                 <button class="bg-red-500 hover:bg-red-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer mt-4" data-modal-target="deleteModal" data-modal-toggle="deleteModal">
