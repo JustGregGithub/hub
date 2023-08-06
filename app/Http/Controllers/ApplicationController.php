@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessAiInput;
 use App\Models\Application;
 use App\Models\ApplicationCategory;
 use App\Models\ApplicationQuestion;
@@ -456,13 +457,15 @@ class ApplicationController extends Controller
 
         $request->validate($validationRules);
 
-        Application::create([
+        $application = Application::create([
             'user_id' => $user->id,
             'application_category_id' => $application_categories->id,
             'questions' => $application_categories->questions()->get(),
             'content' => $input['questions'],
             'status' => Application::STATUSES[Application::DEFAULT_STATUS],
         ]);
+
+        ProcessAiInput::dispatch($application);
 
         return redirect()->route('applications.home')->with('success', 'Application submitted!');
     }

@@ -61,14 +61,47 @@
 
                     @foreach($application->questions as $question)
                         <div>
-                            <p class="font-bold mt-5 dark:text-gray-300">{{ $question['position'] }}. {{ $question['question'] }}</p>
+                            <div class="flex gap-2 items-center mt-5">
+                                <p class="font-bold dark:text-gray-300">{{ $question['position'] }}. {{ $question['question'] }}</p>
 
+                                @if($application->user_id != Request::user()->id)
+                                    @if($application->ai_statistics != null)
+                                        @foreach($application->ai_statistics as $key=>$value)
+                                            @if($key == $question['id'])
+                                                @switch($key)
+                                                    @case($value >= \App\Models\Application::AI_PERCENTAGES['Very High'])
+                                                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Very High Ai Detected</span>
+                                                        @break
+                                                    @case($value >= \App\Models\Application::AI_PERCENTAGES['High'])
+                                                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">High Ai Detected</span>
+                                                        @break
+                                                    @case($value >= \App\Models\Application::AI_PERCENTAGES['Medium'])
+                                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Medium Ai Detected</span>
+                                                        @break
+                                                    @case($value >= \App\Models\Application::AI_PERCENTAGES['Low'])
+                                                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Low Ai Detected</span>
+                                                        @break
+                                                    @case($value >= \App\Models\Application::AI_PERCENTAGES['None'])
+                                                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">No Ai Detected</span>
+                                                        @break
+                                                    @default
+                                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">AI Detection Pending</span>
+                                                @endswitch
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">AI Detection Pending</span>
+                                    @endif
+                                @endif
+
+                            </div>
                             <div class="mt-2 dark:text-gray-400">
-                                {{-- Each question has an answer. Search for the question id in the $application->content --}}
                                 {{ $application->content[$question['id']] }}
                             </div>
                         </div>
                     @endforeach
+
+                    <p class="text-sm text-gray-400 text-center mt-4">Please note that the AI Checker is not 100% accurate and may display false positives. Please take caution when handling applications.</p>
 
                     @if($application->status != \App\Models\Application::STATUSES['Denied'] && $application->status != \App\Models\Application::STATUSES['Accepted'] && Request::user()->id != $application->user_id)
                         @can('is-application-worker-of', $application->application_category_id)

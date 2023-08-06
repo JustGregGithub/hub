@@ -16,12 +16,14 @@ class Application extends Model
         'content',
         'status',
         'worker_id',
-        'reason'
+        'reason',
+        'ai_statistics'
     ];
 
     protected $casts = [
         'questions' => 'array',
-        'content' => 'array'
+        'content' => 'array',
+        'ai_statistics' => 'array'
     ];
 
     const DEFAULT_STATUS = 'Under Review';
@@ -30,6 +32,14 @@ class Application extends Model
         'Under Review' => 10,
         'Accepted' => 20,
         'Denied' => 30,
+    ];
+
+    CONST AI_PERCENTAGES = [
+        'None' => 0,
+        'Low' => 25,
+        'Medium' => 50,
+        'High' => 75,
+        'Very High' => 100
     ];
 
     public function category() {
