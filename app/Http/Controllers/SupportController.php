@@ -64,7 +64,14 @@ class SupportController extends Controller
         if ($user->isManagement()) {
             $user_categories = ApplicationCategory::all();
         } else {
-            $user_categories = ApplicationCategory::whereIn('worker_role', $user->getDiscordRoles())->get();
+            $discordRoles = $user->getDiscordRoles();
+            $roleIds = [];
+
+            foreach ($discordRoles as $roleIdsArray) {
+                $roleIds = array_merge($roleIds, $roleIdsArray);
+            }
+
+            $user_categories = ApplicationCategory::whereIn('worker_role', $roleIds)->get();
         }
 
         return view('application.support', [
