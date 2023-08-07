@@ -519,8 +519,6 @@ class ApplicationController extends Controller
                 $request = Http::withHeaders([
                     'authorization' => env('DISCORD_BOT_AUTHORIZATION')
                 ])->post(env('DISCORD_BOT_URL') . '/api/discord/roles/' . $category->role_guild . '/' . $application->user_id . '/' . $category->role);
-
-                dd($request);
             }
         } else if ($application->status == Application::STATUSES['Under Review']) {
             $message = 'Your application is now under review by <@' . $user->id . '>!';;
