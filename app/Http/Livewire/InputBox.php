@@ -16,7 +16,7 @@ class InputBox extends Component
         $this->model = $model;
         $this->column = $column;
         $this->label = $label;
-        $this->value = $this->model->{$this->column};
+        $this->value = $this->model->{$this->column} ?? '';
     }
 
     public function updatedValue()

@@ -12,6 +12,7 @@ use App\Models\TicketCategory;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Spatie\DiscordAlerts\Facades\DiscordAlert;
 
 class ApplicationController extends Controller
@@ -512,6 +513,14 @@ class ApplicationController extends Controller
                 $ticket->save();
             } else {
                 $message = 'Congratulations! You have been accepted by <@' . $user->id . '>!';
+            }
+
+            if ($category->add_role) {
+                $request = Http::withHeaders([
+                    'authorization' => env('DISCORD_BOT_AUTHORIZATION')
+                ])->post(env('DISCORD_BOT_URL') . '/api/discord/roles/' . $category->role_guild . '/' . $application->user_id . '/' . $category->role);
+
+                dd($request);
             }
         } else if ($application->status == Application::STATUSES['Under Review']) {
             $message = 'Your application is now under review by <@' . $user->id . '>!';;

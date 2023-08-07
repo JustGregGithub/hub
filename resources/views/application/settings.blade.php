@@ -259,7 +259,7 @@
                                 {{ $category->name }} <small class="text-gray-400">| {{ $category->description }}</small>
                             </h2>
                             <div class="flex gap-4 items-center">
-                                <div id="tooltip-status" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                <div id="tooltip-toggle" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                     Toggle whether the applications are open or closed.
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>

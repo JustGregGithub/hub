@@ -37,37 +37,59 @@
                     </div>
 
                     <span class="font-extrabold text-lg">Application Settings</span>
-                    <div class="flex gap-4">
-                        <livewire:input-box :model="$category" column="name" label="Name" />
-                        <livewire:input-box :model="$category" column="description" label="Description" />
-                    </div>
-                    <livewire:select-dropdown column="application_section_id" label="Application Section" :model="$category" />
-                    <hr class="h-px my-8 mt-4 mb-2 bg-gray-200 border-0 dark:bg-gray-700">
-
-                    <div class="flex gap-4">
-                        <form method="POST" action="{{ route('applications.settings.application.interview', $category->id) }}" class="mt-2">
-                            @csrf
-                            @method('PATCH')
-                            <div class="flex gap-4">
-                                <label for="interviewTicket" class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Enable Interview Tickets?
-                                    <select name="interviewTicket" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="1" @if($category->create_interview == 1) selected @endif>Yes</option>
-                                        <option value="0" @if($category->create_interview == 0) selected @endif>No</option>
-                                    </select>
-                                </label>
-
-                                <label for="interviewCategory" class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Interview Ticket Category?
-                                    <select name="category" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        @foreach($ticketCategories as $ticketCategory)
-                                            <option value="{{ $ticketCategory->id  }}" @if($ticketCategory->id == $category->interview_category) selected @endif>{{ $ticketCategory->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                            </div>
-
-                            <input type="submit" value="Submit Interview Changes" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer mt-4">
-                        </form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
+                            <div class="flex gap-4">
+                                <livewire:input-box :model="$category" column="name" label="Name" />
+                                <livewire:input-box :model="$category" column="description" label="Description" />
+                            </div>
+                            <livewire:select-dropdown column="application_section_id" label="Application Section" :model="$category" />
+                            <hr class="h-px my-8 mt-4 mb-2 bg-gray-200 border-0 dark:bg-gray-700">
+                            <div class="flex gap-4 items-center">
+                                <label class="flex flex-col w-1/4">
+                                    <div class="flex gap-2">
+                                        <div id="tooltip-question" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Toggle whether a role should be added to the user upon application approval.
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+
+                                        <span class="text-gray-700 dark:text-gray-300 mb-1">Add Role</span>
+                                        <svg data-tooltip-target="tooltip-question" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                                        </svg>
+                                    </div>
+                                    <livewire:toggle-component :model="$category" column="add_role" label="Enable Application"/>
+                                </label>
+                                <div class="flex flex-col w-full">
+                                    <livewire:input-box :model="$category" column="role_guild" label="Discord Guild ID" />
+                                    <livewire:input-box :model="$category" column="role" label="Discord Role ID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <form method="POST" action="{{ route('applications.settings.application.interview', $category->id) }}" class="mt-2">
+                                @csrf
+                                @method('PATCH')
+                                <div class="flex gap-4">
+                                    <label for="interviewTicket" class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Enable Interview Tickets?
+                                        <select name="interviewTicket" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option value="1" @if($category->create_interview == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($category->create_interview == 0) selected @endif>No</option>
+                                        </select>
+                                    </label>
+
+                                    <label for="interviewCategory" class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Interview Ticket Category?
+                                        <select name="category" class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @foreach($ticketCategories as $ticketCategory)
+                                                <option value="{{ $ticketCategory->id  }}" @if($ticketCategory->id == $category->interview_category) selected @endif>{{ $ticketCategory->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <input type="submit" value="Submit Interview Changes" class="bg-green-500 hover:bg-green-400 transition rounded-md px-4 py-2 text-white w-full mt-2 cursor-pointer mt-4">
+                            </form>
+                            <hr class="h-px my-8 mt-4 mb-2 bg-gray-200 border-0 dark:bg-gray-700">
                             <div class="flex flex-col justify-center">
                                 <livewire:input-box :model="$category" column="guild" label="Guild ID" />
                                 <div class="flex gap-4 items-baseline">
@@ -84,6 +106,7 @@
                             @endcan
                         </div>
                     </div>
+
                 </div>
                 <div class="bg-gray-50 dark:bg-slate-500 rounded-md mt-4 p-4">
                     <span class="font-extrabold">Application Information</span>
