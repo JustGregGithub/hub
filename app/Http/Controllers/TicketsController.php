@@ -189,7 +189,15 @@ class TicketsController extends Controller
         if ($input['assigned_person'] == -1) {
             $ticket->assigned_person = null;
         } else {
-            $ticket->assigned_person = $input['assigned_person'] ?: $ticket->assigned_person;
+            //check if the assigned person is a valid user
+            $user = User::findOrFail($input['assigned_person']);
+
+            //if the user does exist
+            if ($user) {
+                $ticket->assigned_person = $input['assigned_person'] ?: $ticket->assigned_person;
+            } else {
+                return redirect()->route('tickets.view', $ticket->slug)->withErrors('The assigned person has not logged into the hub!');
+            }
         }
 
 
