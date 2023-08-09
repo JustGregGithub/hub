@@ -38,7 +38,7 @@
                             <p class="font-bold text-lg">{{ $application_section->name }}</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
                                 @foreach ($application_section->categories as $category)
-                                    @if($category->is_open)
+                                    @if($category->is_open && !$category->restrict)
                                         <div class="border rounded-xl p-4 text-center bg-gray-50 dark:bg-slate-600 dark:text-gray-300 dark:border-gray-400 h-fit">
                                             <p>
                                                 {{ $category->name }}
@@ -52,6 +52,23 @@
                                                 </a>
                                             </div>
                                         </div>
+                                    @endif
+                                    @if($category->restrict)
+                                        @if(Request::user()->hasDiscordRole($category->restrict_guild, $category->restrict_role))
+                                            <div class="border rounded-xl p-4 text-center bg-gray-50 dark:bg-slate-600 dark:text-gray-300 dark:border-gray-400 h-fit">
+                                                <p>
+                                                    {{ $category->name }}
+                                                </p>
+                                                <p class="text-sm text-gray-400">
+                                                    {{ $category->description }}
+                                                </p>
+                                                <div class="mt-6">
+                                                    <a href="@if(\App\Models\Application::where('application_category_id', $category->id)->where('user_id', Request::user()->id)->where('status', \App\Models\Application::STATUSES['Under Review'])->exists()) #" @else {{ route('applications.apply', $category->id) }}" @endif class="bg-purple-200 px-4 py-2 rounded-md text-purple-600 @if(\App\Models\Application::where('application_category_id', $category->id)->where('user_id', Request::user()->id)->where('status', \App\Models\Application::STATUSES['Under Review'])->exists()) cursor-not-allowed @endif">
+                                                        Apply Now
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>

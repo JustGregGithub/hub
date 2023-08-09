@@ -18,6 +18,9 @@ class ApplicationCategory extends Model
         'is_open',
         'create_interview',
         'interview_category',
+        'restrict',
+        'restrict_guild',
+        'resitrct_role'
     ];
 
     public function applications() {

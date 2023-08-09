@@ -35,6 +35,12 @@ class ApplicationController extends Controller
     public function apply(Request $request, ApplicationCategory $application_categories) {
         $user = $request->user();
 
+        if ($application_categories->restrict) {
+            if (!$user->hasDiscordRole($application_categories->restrict_guild, $application_categories->restrict_role)) {
+                return redirect()->route('applications.home')->withErrors('You do not have the required role to apply for this category!');
+            }
+        }
+
         if (Application::where('application_category_id', $application_categories->id)->where('user_id', $user->id)->where('status', Application::STATUSES['Under Review'])->exists()) {
             return redirect()->route('applications.home')->withErrors('You already have an application in this category!');
         }
@@ -439,6 +445,12 @@ class ApplicationController extends Controller
         $user = $request->user();
         $input = $request->all();
         $validationRules = [];
+
+        if ($application_categories->restrict) {
+            if (!$user->hasDiscordRole($application_categories->restrict_guild, $application_categories->restrict_role)) {
+                return redirect()->route('applications.home')->withErrors('You do not have the required role to apply for this category!');
+            }
+        }
 
         if (Application::where('user_id', $user->id)->where('application_category_id', $application_categories->id)->where('status', Application::STATUSES['Under Review'])->first()) {
             return redirect()->back()->withErrors('You have already applied for this category!');
