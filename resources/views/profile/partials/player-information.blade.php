@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
                 <div class="bg-green-500 px-5 py-8 rounded-xl font-bold text-md text-gray-300 flex items-center gap-4 w-full">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12">
@@ -85,6 +85,26 @@
                         @else
                             Commend
                         @endif
+                    </div>
+                </div>
+                <div class="bg-blue-500 px-5 py-8 rounded-xl font-bold text-md text-gray-300 flex items-center gap-4 w-full">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+
+                    @php
+                        $duration = \Carbon\Carbon::now()->addMinutes($record['data']['playerPlaytime'])->diffForHumans([
+                            'parts' => 3,
+                            'join' => ', ',
+                            'syntax' => \Carbon\Carbon::DIFF_ABSOLUTE
+                        ]);
+                    @endphp
+
+                    <div>
+                        <p class="text-white text-xl">{{ $duration }}</p>
+                        Playtime
                     </div>
                 </div>
             </div>
