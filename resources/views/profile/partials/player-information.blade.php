@@ -79,8 +79,12 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-white text-xl">{{ $record['data']['playerCommends'] }}%</p>
-                        Commends
+                        <p class="text-white text-xl">{{ $record['data']['playerCommends'] }}</p>
+                        @if($record['data']['playerCommends'] > 1 || $record['data']['playerCommends'] < 1)
+                            Commends
+                        @else
+                            Commend
+                        @endif
                     </div>
                 </div>
             </div>
