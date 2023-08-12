@@ -14,7 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 
         <!-- TinyMCE -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.0/tinymce.min.js" integrity="sha512-hMjDyb/4G3SapFEM71rK+Gea0+ZEr9vDlhBTyjSmRjuEgza0Ytsb67GE0aSpRMYW++z6kZPPcnddwlUG6VKm9w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="https://cdn.tiny.cloud/1/jyud8m73n0bb1gczkp4w6ji6om9gjfv5iqbqqsxzzgj9ygxh/tinymce/6/plugins.min.js" referrerpolicy="origin"></script>
 
         <!-- Scripts -->

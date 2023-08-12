@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
-        $response = Http::withHeaders([
+        $response = Http::timeout(10)->withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
         ])->asForm()->post('https://staff.lynus.gg/api/bot/getProfile', [
             'discordId' => $request->user()->id,
