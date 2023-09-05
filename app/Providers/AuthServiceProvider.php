@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
-use App\Models\Application;
-use App\Models\ApplicationCategory;
-use App\Models\Ticket;
-use App\Models\TicketCategory;
+use App\Models\Hub\Application;
+use App\Models\Hub\ApplicationCategory;
+use App\Models\Hub\Ticket;
+use App\Models\Hub\TicketCategory;
+use App\Models\Staff\Server;
+use App\Models\Staff\ServerRole;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -97,6 +100,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('has-category-role', function (User $user, TicketCategory $category) {
+            if ($user->isManagement()) return true;
+
             return $user->hasDiscordRole($category->guild, $category->role);
         });
 
@@ -158,5 +163,55 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasDiscordRole($category->guild, $category->worker_role);
         });
 
+        /**
+         * Server Policies
+         */
+
+        Gate::define('can-view-server', function (User $user, Server $server) {
+            if ($user->isOwner()) return true;
+            if ($user->isManagement()) return true;
+
+            $roles = ServerRole::where('server_id', $server->id)->get();
+
+            foreach ($roles as $role) {
+                //if the user has the role they are trying to view, they can view it.
+                if ($user->hasDiscordRole($role->guild, $role->id)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        Gate::define('can-manage-roles', function (User $user, Server $server) {
+
+            if ($user->isOwner()) return true;
+            if ($user->isManagement()) return true;
+
+            $roles = ServerRole::where('server_id', $server->id)->get();
+
+            //each role has a priority, if the user has a role with a higher priority than the role they are trying to manage, they can manage it.
+            foreach ($roles as $role) {
+                //if the user has the role they are trying to manage, they can manage it.
+                if ($user->hasDiscordRole($role->guild, $role->id)) {
+                    if ($role->can_manage_permissions) return true;
+                }
+            }
+
+            return false;
+        });
+
+        Gate::define('can-view-timeclock', function (User $user, Server $server) {
+            if ($user->isOwner()) return true;
+            if ($user->isManagement()) return true;
+
+            $roles = ServerRole::where('server_id', $server->id)->get();
+
+            foreach ($roles as $role) {
+                if ($user->hasDiscordRole($role->guild, $role->id)) {
+                    if ($role->can_view_timeclock) return true;
+                }
+            }
+        });
     }
 }

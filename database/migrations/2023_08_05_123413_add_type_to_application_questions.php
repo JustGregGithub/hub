@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ApplicationQuestion;
+use App\Models\Hub\ApplicationQuestion;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Ticket;
+use App\Models\Hub\Ticket;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 

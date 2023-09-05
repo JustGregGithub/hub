@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('application_categories', function (Blueprint $table) {
-            $table->longText('information')->nullable()->after('description')->default('No information provided.');
+            $table->longText('information')->after('description')->default('No information provided.');
         });
     }
 

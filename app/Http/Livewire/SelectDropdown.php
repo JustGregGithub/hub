@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ApplicationSection;
+use App\Models\Hub\ApplicationSection;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
