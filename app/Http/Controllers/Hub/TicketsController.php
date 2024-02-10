@@ -46,6 +46,7 @@ class TicketsController extends Controller
      * @return RedirectResponse
      */
     public function post_create(Request $request) {
+
         $request->validate([
             'title' => 'required|min:10|max:100',
             'category' => 'required|integer|exists:ticket_categories,id',
@@ -78,7 +79,7 @@ class TicketsController extends Controller
                 'url' => route('tickets.view', $ticket->slug),
                 'timestamp' => Carbon::now()->toIso8601String(),
                 'footer' => [
-                    'text' => 'Lynus.gg Hub'
+                    'text' => 'Rockford Hub'
                 ]
             ]
         ]);
@@ -120,7 +121,7 @@ class TicketsController extends Controller
                     'url' => route('tickets.view', $ticket->slug),
                     'timestamp' => Carbon::now()->toIso8601String(),
                     'footer' => [
-                        'text' => 'Lynus.gg Hub'
+                        'text' => 'Rockford Hub'
                     ]
                 ]
             ]);
@@ -181,7 +182,7 @@ class TicketsController extends Controller
                     'url' => route('tickets.view', $ticket->slug),
                     'timestamp' => Carbon::now()->toIso8601String(),
                     'footer' => [
-                        'text' => 'Lynus.gg Hub'
+                        'text' => 'Rockford Hub'
                     ]
                 ]
             ]);
@@ -223,26 +224,35 @@ class TicketsController extends Controller
             return redirect()->route('tickets.view', $ticket->slug)->withErrors('You cannot add the ticket creator as an additional person!');
         }
 
-        if (in_array($input['userid'], $ticket->allowed_users)) {
+        if (in_array($input['userid'], (array)$ticket->allowed_users)) {
             return redirect()->route('tickets.view', $ticket->slug)->withErrors('This user already has access to the ticket!');
         }
 
-        if (User::findOrFail($input['userid'])->hasDiscordRole($ticket->category->role)) {
+        if (User::findOrFail($input['userid'])->hasDiscordRole($ticket->category->guild, $ticket->category->role)) {
             return redirect()->route('tickets.view', $ticket->slug)->withErrors('This user already has access to the ticket!');
         }
 
-        $allowed_users = json_decode($ticket->allowed_users, true);
-        $allowed_users[] = $input['userid'];
+        $allowed_users = $ticket->allowed_users;
+        array_push($allowed_users, $input['userid']);
 
-        $ticket->allowed_users = json_encode($allowed_users);
+        $ticket->allowed_users = $allowed_users;
         $ticket->save();
 
         return redirect()->route('tickets.view', $ticket->slug)->with('success', 'Successfully added the user to the ticket!');
     }
 
     public function delete_user(Request $request, Ticket $ticket) {
-        Gate::authorize('is-ticket-owner', $ticket);
-        Gate::authorize('can-support', $ticket);
+        Gate::before(function ($user, $ability) use ($ticket) {
+            if ($ability === 'is-ticket-owner' && Gate::allows('is-ticket-owner', $ticket)) {
+                return true;
+            }
+
+            if ($ability === 'can-support' && Gate::allows('can-support', $ticket)) {
+                return true;
+            }
+
+            return false;
+        });
 
         $request->validate([
             'userid' => [
@@ -253,7 +263,7 @@ class TicketsController extends Controller
 
         $input = $request->all();
 
-        $allowed_users = json_decode($ticket->allowed_users, true);
+        $allowed_users = $ticket->allowed_users;
         $allowed_users = array_diff($allowed_users, [$input['userid']]);
         $ticket->allowed_users = json_encode($allowed_users);
         $ticket->save();
@@ -287,7 +297,7 @@ class TicketsController extends Controller
         $createdat = (new Carbon($ticket->created_at))->format('m/d/Y H:i');
         $updatedat = (new Carbon($ticket->updated_at))->format('m/d/Y H:i');
 
-        $allowed_users = User::whereIn('id', $ticket->allowed_users)->get();
+        $allowed_users = User::whereIn('id', (array)$ticket->allowed_users)->get();
 
         return view('hub.ticket.view', [
             'ticket' => $ticket,

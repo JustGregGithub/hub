@@ -111,7 +111,7 @@ return [
     */
 
     'guilds' => [
-        env('DISCORD_GUILD_ID')
+
     ],
 
     /*
@@ -143,9 +143,7 @@ return [
     // I'm working on a better way to do this, but for now, this will work.
 
     'guild_roles' => [
-         '1082887674681098292' => [
-             '1082887674756595719', //Civ 1
-         ],
+
     ],
 
     /*

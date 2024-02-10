@@ -19,10 +19,10 @@
                     {{-- for each \app\Models\Staff\ServerRole::PERMISSIONS, get the column with that name in the $role variable --}}
                     @foreach(\App\Models\Staff\ServerRole::PERMISSIONS as $permission)
                         <tr class="bg-zinc-800 text-gray-300 hover:bg-zinc-900 transition">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ Str::title(str_replace('_', ' ', $permission)) }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <livewire:toggle-component :model="$role" :column="$permission"/>
                             </td>
                         </tr>

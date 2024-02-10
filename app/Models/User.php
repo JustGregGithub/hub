@@ -202,6 +202,8 @@ class User extends Authenticatable
                 return $role;
             }
         }
+
+        return 'No Role';
     }
 
     public function records() {

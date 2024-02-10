@@ -1,0 +1,38 @@
+diff --git a/src/Http/Controllers/DiscordController.php b/src/Http/Controllers/DiscordController.php
+index 34fd1c1..97e5312 100644
+--- a/src/Http/Controllers/DiscordController.php
++++ b/src/Http/Controllers/DiscordController.php
+@@ -6,6 +6,7 @@
+ use Illuminate\Http\RedirectResponse;
+ use App\Providers\RouteServiceProvider;
+ use Illuminate\Support\Facades\DB;
++use Illuminate\Support\Facades\Http;
+ use Illuminate\Support\Facades\Schema;
+ use Jakyeru\Larascord\Http\Requests\StoreUserRequest;
+ use Jakyeru\Larascord\Services\DiscordService;
+@@ -126,8 +127,16 @@ public function handle(StoreUserRequest $request): RedirectResponse | JsonRespon
+             auth()->login($user, config('larascord.remember_me', false));
+         }
+
+-        // Redirecting the user to the intended page or to the home page.
+-        return redirect()->intended(RouteServiceProvider::HOME);
++        // Get the user's discord roles
++        $roles = Http::withHeaders([
++            'authorization' => env('APP_API_TOKEN'),
++        ])->get('http://127.0.0.1:8001/update/' . env('DISCORD_GUILD_ID') . '/' . $user->id);
++
++        if ($roles->status() === 200) {
++            return redirect()->intended(RouteServiceProvider::HOME);
++        }
++
++        return redirect()->route('login');
+     }
+
+     /**
+@@ -172,4 +181,4 @@ public function destroy(): RedirectResponse | JsonResponse
+             return redirect('/')->with('success', config('larascord.success_messages.user_deleted', 'Your account has been deleted.'));
+         }
+     }
+-}
+\ No newline at end of file
++}

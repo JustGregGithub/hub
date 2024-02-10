@@ -5,9 +5,9 @@
                 <h1 class="text-xl font-bold dark:text-gray-300">Ticket Settings <span class="font-normal text-sm text-gray-500 dark:text-gray-400">- Modify & View Tickets / Categories</span>
                 </h1>
             </div>
-            <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4">
+            <div class="bg-neutral-800 rounded-xl p-4 mt-4">
                 <span class="font-bold dark:text-gray-300">Categories</span>
-                <div class="bg-gray-50 dark:bg-slate-500 p-2 rounded-md mt-2 flex flex-wrap w-full">
+                <div class="bg-neutral-700 p-2 rounded-md mt-2 flex flex-wrap w-full">
 
                     {{--                        Left side --}}
                     <div class="flex flex-wrap w-full xl:w-11/12">
@@ -16,7 +16,7 @@
                             @method('PATCH')
 
                             <div class="w-full xl:w-4/12 p-2 flex items-center">
-                                <select name="category" id="category" class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select name="category" id="category" class="border border-gray-300 rounded-md text-sm w-full dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="-1" disabled selected>-- Select a category</option>
                                     <option value="new">> Add Category</option>
                                     <option value="-1" disabled>&nbsp;</option>
@@ -33,10 +33,10 @@
                             </div>
 
                             <div class="w-full xl:w-6/12 p-2">
-                                <input type="text" placeholder="New Name" id="newname" name="newname" value="{{ old('newname') }}" class="w-full block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="50" disabled="1">
+                                <input type="text" placeholder="New Name" id="newname" name="newname" value="{{ old('newname') }}" class="border rounded-md text-sm w-full mt-2 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white focus:ring-blue-500 focus:border-blue-500" maxlength="50" disabled="1">
                                 <div class="flex gap-4">
-                                    <input type="text" placeholder="Discord Guild ID" id="guild" name="guild" value="{{ old('guild') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
-                                    <input type="text" placeholder="Discord Role ID" id="role" name="role" value="{{ old('role') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
+                                    <input type="text" placeholder="Discord Guild ID" id="guild" name="guild" value="{{ old('guild') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
+                                    <input type="text" placeholder="Discord Role ID" id="role" name="role" value="{{ old('role') }}" class="w-full mt-2 block border border-gray-300 rounded-md text-sm dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" maxlength="20" disabled="1">
                                 </div>
                                 <div class="flex items-center mt-2">
                                     <div id="tooltip-hidden-user" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-700 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -67,12 +67,12 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4">
+            <div class="bg-neutral-800 rounded-xl p-4 mt-4">
                 <span class="font-bold dark:text-gray-300">Categories Information</span>
 
                 <div class="relative overflow-x-auto mt-2">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-neutral-700 dark:text-gray-200">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Category Name
@@ -92,16 +92,16 @@
                         @foreach($categories as $category)
                             @if ($category->id != $defaultCategory->id)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <th scope="row" class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                         {{ $category->name }}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                         {{ $category->guild }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                         {{ $category->role }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                         @if ($category->is_hidden == 1)
                                             <span class="text-green-500">Yes</span>
                                         @else

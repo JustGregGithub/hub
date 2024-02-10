@@ -57,7 +57,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if (in_array($user->id, $ticket->allowed_users)) {
+            if (in_array($user->id, (array)$ticket->allowed_users)) {
                 return true;
             }
 
@@ -70,7 +70,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('is-not-allowed-user', function (User $user, Ticket $ticket) {
 
-            if (in_array($user->id, $ticket->allowed_users)) {
+            if (in_array($user->id, (array)$ticket->allowed_users)) {
                 return false;
             }
 
@@ -78,7 +78,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('can-support', function (User $user, Ticket $ticket) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             if ($user->id === $ticket->user_id) return false;;
 
@@ -100,7 +100,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('has-category-role', function (User $user, TicketCategory $category) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             return $user->hasDiscordRole($category->guild, $category->role);
         });
@@ -110,7 +110,7 @@ class AuthServiceProvider extends ServiceProvider
          */
 
         Gate::define('view-application', function (User $user, Application $application) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             if ($user->id === $application->user_id) return true;
 
@@ -122,7 +122,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-application-manager-of-any', function (User $user) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             $categories = ApplicationCategory::all();
             foreach ($categories as $category) {
@@ -135,13 +135,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-application-manager-of', function (User $user, ApplicationCategory $category) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             return $user->hasDiscordRole($category->guild, $category->manager_role);
         });
 
         Gate::define('is-application-worker-of-any', function (User $user) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             $categories = ApplicationCategory::all();
             foreach ($categories as $category) {
@@ -154,7 +154,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-application-worker-of', function (User $user, $categoryId) {
-            if ($user->isManagement()) return true;
+            if ($user->isOwner()) return true;
 
             $category = ApplicationCategory::findOrFail($categoryId);
 

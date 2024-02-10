@@ -3,11 +3,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mt-10">
                 <h1 class="text-xl font-bold dark:text-gray-300">Ticket Support</h1>
-                <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4 flex flex-col gap-4">
+                <div class="bg-neutral-800 rounded-xl p-4 mt-4 flex flex-col gap-4">
                     <span class="font-bold dark:text-gray-300">Your Available Categories</span>
                     @foreach($categories as $category)
                         @if($category != \App\Models\Hub\TicketCategory::getDefault())
-                            <div class="bg-gray-100 dark:bg-slate-500 rounded-md p-4 w-full flex justify-between">
+                            <div class="bg-neutral-700 rounded-md p-4 w-full flex justify-between">
                                 <p class="text-md dark:text-gray-300">
                                     {{ $category->name }}
                                 </p>

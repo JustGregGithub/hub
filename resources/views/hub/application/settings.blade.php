@@ -15,7 +15,7 @@
                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                     Create Application Section
                                 </h3>
-                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createSectionModal">
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="createSectionModal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-600 dark:text-gray-300 rounded-xl p-4 mt-4">
+                <div class="bg-neutral-800 dark:text-gray-300 rounded-xl p-4 mt-4">
                     <div class="flex justify-between items-center">
                         <span class="font-extrabold">Application Sections</span>
                         <button href="" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md" data-modal-target="createSectionModal" data-modal-toggle="createSectionModal">Create</button>
@@ -56,7 +56,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Rename Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="renameModal-{{ $section->id }}">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="renameModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -86,7 +86,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Set Application Section Colours
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="colourModal-{{ $section->id }}">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="colourModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -120,7 +120,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Set Default Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal-{{ $section->id }}">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="defaultModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -148,7 +148,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Delete Application Section
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteModal-{{ $section->id }}">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="deleteModal-{{ $section->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -184,16 +184,16 @@
                             <div id="dropdown-{{ $section->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="defaultModal-{{ $section->id }}" data-modal-toggle="defaultModal-{{ $section->id }}">Set as default</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-target="defaultModal-{{ $section->id }}" data-modal-toggle="defaultModal-{{ $section->id }}">Set as default</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="renameModal-{{ $section->id }}" data-modal-toggle="renameModal-{{ $section->id }}">Rename</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-target="renameModal-{{ $section->id }}" data-modal-toggle="renameModal-{{ $section->id }}">Rename</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="colourModal-{{ $section->id }}" data-modal-toggle="colourModal-{{ $section->id }}">Set Colours</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-target="colourModal-{{ $section->id }}" data-modal-toggle="colourModal-{{ $section->id }}">Set Colours</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-red-500" data-modal-target="deleteModal-{{ $section->id }}" data-modal-toggle="deleteModal-{{ $section->id }}">Delete</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white text-red-500" data-modal-target="deleteModal-{{ $section->id }}" data-modal-toggle="deleteModal-{{ $section->id }}">Delete</a>
                                     </li>
                                 </ul>
                             </div>
@@ -205,7 +205,7 @@
                     </div>
                 </div>
             @endcan
-            <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4">
+            <div class="bg-neutral-800 rounded-xl p-4 mt-4">
                 @can('is-mgmt')
                     <div id="createModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative w-full max-w-2xl max-h-full">
@@ -216,7 +216,7 @@
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                         Create Application
                                     </h3>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createModal">
+                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white" data-modal-hide="createModal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                         </svg>
@@ -253,7 +253,7 @@
                 @endcan
 
                 @foreach($categories as $category)
-                    <div class="bg-gray-50 dark:bg-slate-500 dark:text-gray-300 rounded-xl p-4 mt-4">
+                    <div class="bg-neutral-700 dark:text-gray-300 rounded-xl p-4 mt-4">
                         <div class="flex justify-between items-center">
                             <h2 class="truncate px-4 flex-shrink">
                                 {{ $category->name }} <small class="text-gray-400">| {{ $category->description }}</small>

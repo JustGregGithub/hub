@@ -6,10 +6,10 @@
                             class="font-normal text-gray-500 dark:text-gray-400">Application Settings</span>
                     / {{ $category->name }}</h1>
             </div>
-            <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4 dark:text-gray-300">
+            <div class="bg-neutral-800 rounded-xl p-4 mt-4 dark:text-gray-300">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1 md:grid-rows-2 gap-4">
-                        <div class="bg-gray-50 dark:bg-slate-500 rounded-md p-4 h-fit">
+                        <div class="bg-neutral-700 rounded-md p-4 h-fit">
                             <span class="font-extrabold text-lg">Application Settings</span>
                             <div class="flex gap-4">
                                 <livewire:input-box :model="$category" column="name" label="Name"/>
@@ -30,7 +30,7 @@
                                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Enable
                                             Interview?
                                             <select name="interviewTicket"
-                                                    class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-neutral-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 <option value="1" @if($category->create_interview == 1) selected @endif>
                                                     Yes
                                                 </option>
@@ -43,7 +43,7 @@
                                         <label for="interviewCategory"
                                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 w-full">Category?
                                             <select name="category"
-                                                    class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="border border-gray-300 rounded-md text-sm mt-2 w-full dark:bg-neutral-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 @foreach($ticketCategories as $ticketCategory)
                                                     <option value="{{ $ticketCategory->id  }}"
                                                             @if($ticketCategory->id == $category->interview_category) selected @endif>{{ $ticketCategory->name }}</option>
@@ -57,7 +57,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="bg-gray-50 dark:bg-slate-500 rounded-md p-4 h-fit">
+                        <div class="bg-neutral-700 rounded-md p-4 h-fit">
                             <span class="font-extrabold text-lg">Application Restrictions</span>
 
                             <div class="flex gap-4 items-center">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="grid grid-rows-1 md:grid-rows-2 gap-4">
-                        <div class="bg-gray-50 dark:bg-slate-500 rounded-md p-4">
+                        <div class="bg-neutral-700 rounded-md p-4">
                             <span class="font-extrabold text-lg">Application Interview Settings</span>
                             <div class="flex gap-4 items-center">
                                 <label class="flex flex-col w-1/4">
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 dark:bg-slate-500 rounded-md p-4 h-fit">
+                        <div class="bg-neutral-700 rounded-md p-4 h-fit">
                             <div id="deleteModal" tabindex="-1" aria-hidden="true"
                                  class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative w-full max-w-2xl max-h-full">
@@ -131,7 +131,7 @@
                                                 Delete Application Category
                                             </h3>
                                             <button type="button"
-                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                                     data-modal-hide="deleteModal">
                                                 <svg class="w-3 h-3" aria-hidden="true"
                                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 dark:bg-slate-500 rounded-md mt-4 p-4">
+                <div class="bg-neutral-700 rounded-md mt-4 p-4">
                     <span class="font-extrabold">Application Information</span>
                     <form method="POST"
                           action="{{ route('applications.settings.application.information', $category->id) }}"
@@ -199,7 +199,7 @@
                     </form>
                     <x-tiny-mce/>
                 </div>
-                <div class="bg-gray-50 dark:bg-slate-500 rounded-md mt-4 p-4">
+                <div class="bg-neutral-700 rounded-md mt-4 p-4">
                     <div class="flex justify-between text-lg">
                         <span class="font-extrabold">Application Questions</span>
                         <button href="" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md"
@@ -219,7 +219,7 @@
                                         Create Question
                                     </h3>
                                     <button type="button"
-                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                             data-modal-hide="createModal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                              fill="none" viewBox="0 0 14 14">
@@ -274,7 +274,7 @@
                                                     Move Question
                                                 </h3>
                                                 <button type="button"
-                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                                         data-modal-hide="moveModal-{{ $question->id }}">
                                                     <svg class="w-3 h-3" aria-hidden="true"
                                                          xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -317,7 +317,7 @@
                                                     Rename Question
                                                 </h3>
                                                 <button type="button"
-                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                                         data-modal-hide="renameModal-{{ $question->id }}">
                                                     <svg class="w-3 h-3" aria-hidden="true"
                                                          xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -360,7 +360,7 @@
                                                     Change Question Type
                                                 </h3>
                                                 <button type="button"
-                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                                         data-modal-hide="renameModal-{{ $question->id }}">
                                                     <svg class="w-3 h-3" aria-hidden="true"
                                                          xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -432,7 +432,7 @@
                                                     Delete Question
                                                 </h3>
                                                 <button type="button"
-                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
                                                         data-modal-hide="deleteModal-{{ $question->id }}">
                                                     <svg class="w-3 h-3" aria-hidden="true"
                                                          xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -487,25 +487,25 @@
                                             aria-labelledby="dropdownDefaultButton">
                                             <li>
                                                 <a href="#"
-                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white"
                                                    data-modal-target="moveModal-{{ $question->id }}"
                                                    data-modal-toggle="moveModal-{{ $question->id }}">Move</a>
                                             </li>
                                             <li>
                                                 <a href="#"
-                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white"
                                                    data-modal-target="renameModal-{{ $question->id }}"
                                                    data-modal-toggle="renameModal-{{ $question->id }}">Rename</a>
                                             </li>
                                             <li>
                                                 <a href="#"
-                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white"
                                                    data-modal-target="typeModal-{{ $question->id }}"
                                                    data-modal-toggle="typeModal-{{ $question->id }}">Change Type</a>
                                             </li>
                                             <li>
                                                 <a href="#"
-                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-red-500"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-600 dark:hover:text-white text-red-500"
                                                    data-modal-target="deleteModal-{{ $question->id }}"
                                                    data-modal-toggle="deleteModal-{{ $question->id }}">Delete</a>
                                             </li>

@@ -7,7 +7,7 @@
                     👋</h1>
                 <p class="mt-1">Let&apos;s see what&apos;s in-store today.</p>
             </div>
-            <div class="bg-white dark:bg-slate-600 rounded-xl p-4">
+            <div class="bg-neutral-800 rounded-xl p-4">
                 <h1 class="text-xl font-bold dark:text-gray-400">Quick Actions</h1>
                 <div class="flex flex-wrap gap-4 mt-4">
                     <a href="{{ route('tickets.create') }}" class="bg-purple-200 px-4 py-2 rounded-xl text-purple-600">
@@ -16,18 +16,12 @@
                     <a href="{{ route('tickets.home') }}" class="bg-purple-200 px-4 py-2 rounded-xl text-purple-600">
                         🎫 View My Tickets
                     </a>
-                    <a href="/dashboard" class="bg-purple-200 px-4 py-2 rounded-xl text-purple-600">
-                        🚗 My Vehicles
-                    </a>
-                    <a href="{{ route('store') }}" class="bg-purple-200 px-4 py-2 rounded-xl text-purple-600">
-                        👜 Store
-                    </a>
                 </div>
             </div>
             <div class="mt-10">
                 <h1 class="text-xl dark:text-gray-400 font-bold">My Pinned Tickets</h1>
                 @foreach($pinned_tickets as $ticket)
-                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 rounded-xl p-2 mt-4">
                         <div class="p-2 flex justify-between items-center">
                             <div class="flex">
                                 <div class="bg-gray-200 rounded-md px-2">#{{ $ticket->id }}</div>
@@ -64,7 +58,7 @@
                     </div>
                 @endforeach
                 @if($pinned_tickets->isEmpty())
-                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 rounded-xl p-2 mt-4">
                         <div class="p-2 dark:text-gray-300">
                             No Pinned Tickets
                         </div>
@@ -76,7 +70,7 @@
                             class="font-normal text-sm text-gray-500">- Showing {{ count($applications) }} Application(s)</span>
                 </h1>
                 @foreach($applications as $application)
-                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 rounded-xl p-2 mt-4">
                         <div class="p-2 flex justify-between">
                             <div class="flex">
                                 <div class="bg-{{ \App\Models\Hub\Application::statusForeColor($application->status)  }} rounded-md px-2 text-{{ \App\Models\Hub\Application::statusColor($application->status)  }}">{{ \App\Models\Hub\Application::status($application->status) }}</div>
@@ -99,7 +93,7 @@
                     </div>
                 @endforeach
                 @if($applications->isEmpty())
-                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 rounded-xl p-2 mt-4">
                         <div class="p-2 dark:text-gray-300">
                             No Applications Submitted
                         </div>

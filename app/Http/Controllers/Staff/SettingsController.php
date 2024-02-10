@@ -31,8 +31,9 @@ class SettingsController extends Controller
 
         $server->update($request->validate([
             'name' => 'required|string',
-            'ip' => 'required|string|ipv4|unique:servers,ip,' . $server->id . ',id',
+            'ip' => 'required|string|ipv4',
             'port' => 'required|integer',
+            'fetching_rate' => 'required|integer',
         ]));
 
         return redirect()->back()->with('success', 'Server updated successfully!');

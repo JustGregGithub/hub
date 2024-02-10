@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -137,10 +137,17 @@
                 @if(request()->is('staff*'))
                     bg-zinc-950
                 @else
-                    bg-gray-100 dark:bg-gray-800
+                    bg-neutral-950
                 @endif
         ">
             <main class="sm:ml-64">
+                    <div class="w-full p-4 bg-green-800 text-center">
+                        <small>
+                            <b>
+                                Our server is  now online. You are now able to access the server! We apologise for all the DDoS attacks.
+                            </b>
+                        </small>
+                    </div>
                 <!-- Page Content -->
                 {{ $slot }}
             </main>

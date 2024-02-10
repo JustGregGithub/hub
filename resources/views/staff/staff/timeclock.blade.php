@@ -41,7 +41,15 @@
                 </div>
             </div>
             <div class="bg-purple-800 p-6 rounded-lg h-fit w-full lg:w-1/2">
-                <p class="text-white font-extrabold text-2xl">Weekly Leaderboard</p>
+                <div id="tooltip-leaderboard" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-purple-600">
+                    Leaderboard is updated every 15 minutes.
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <p class="text-white font-extrabold text-2xl flex items-center gap-2">Weekly Leaderboard
+                    <svg data-tooltip-target="tooltip-leaderboard" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-zinc-400">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                    </svg>
+                </p>
                 <p class="text-gray-400">Who has the most amount of clocked hours</p>
                 <div class="flex items-center mt-2" id="rank-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5"

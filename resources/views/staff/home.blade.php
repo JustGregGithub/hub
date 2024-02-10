@@ -28,19 +28,19 @@
                 @foreach(\App\Models\Staff\Server::all() as $server)
                     @can('can-view-server', $server)
                         <tr class="bg-zinc-800 text-gray-300 hover:bg-zinc-900 transition">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $server->name }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $server->isOnline() ? 'Online' : 'Offline' }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $server->playerCount() }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ Auth::user()->getHighestRole($server)->name }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <a href="{{ route('staff.server', $server) }}" class="bg-purple-600 text-white px-4 py-2 rounded-md mt-5">View</a>
                             </td>
                         </tr>

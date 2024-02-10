@@ -76,7 +76,7 @@
                         $totalMinutes += $clockIn->time;
                     }
 
-                    $totalMinutes = 2;
+                    $totalMinutes = 0;
                     $totalHours = floor($totalMinutes / 60); // Calculate whole hours
                     $percentage = $totalMinutes % 60; // Calculate remaining minutes
 
@@ -85,7 +85,15 @@
                     }
                 @endphp
                 <div class="relative bg-purple-800 p-6 rounded-lg h-fit">
-                    <p class="text-white font-extrabold text-2xl">Promotion Goal</p>
+                    <div id="tooltip-goal" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-purple-600">
+                        Goal is updated every 15 minutes.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <p class="text-white font-extrabold text-2xl flex items-center gap-2">Promotion Goal
+                        <svg data-tooltip-target="tooltip-goal" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-zinc-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </p>
                     <p class="text-gray-400">Track your hours for a promotion!</p>
 
                     <div class="flex items-baseline gap-4">

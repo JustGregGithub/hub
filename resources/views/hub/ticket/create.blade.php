@@ -5,7 +5,7 @@
                 <div class="flex justify-between">
                     <h1 class="text-xl font-bold dark:text-gray-400">Create a ticket</h1>
                 </div>
-                <div class="bg-white dark:bg-slate-600 rounded-xl p-4 mt-4">
+                <div class="bg-neutral-800 rounded-xl p-4 mt-4">
                     <form method="POST" action="{{ route('tickets.create.post')  }}">
                         @csrf
                         <div class="flex gap-4 w-full">
@@ -14,7 +14,7 @@
                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Ticket
                                     Title</label>
                                 <input type="text" id="ticketTitle" name="title" value="{{ old('title') }}"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       class="border rounded-md text-sm w-full mt-2 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white focus:ring-blue-500 focus:border-blue-500"
                                        placeholder="This is my ticket title">
                             </div>
                             <div class="w-full">
@@ -22,7 +22,7 @@
                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Ticket
                                     Category</label>
                                 <select id="ticketCategory" name="category"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="border rounded-md text-sm w-full mt-2 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                     @foreach($categories as $category)
                                         @if($category->id != \App\Models\Hub\TicketCategory::getDefault()->id && $category->is_hidden != 1)
                                             <option value="{{ $category->id  }}"

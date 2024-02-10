@@ -90,6 +90,7 @@ class Server extends Model
 
         // Now, you can use Eloquent to retrieve the top 5 players with the highest time
         $top5Players = ServerTimeclock::whereIn('type', [ServerTimeclock::TYPES['clock_out'], ServerTimeclock::TYPES['auto_clock_out']])
+            ->where('server_id', $this->id)
             ->selectRaw('user_id, SUM(time) as total_time')
             ->groupBy('user_id')
             ->orderByDesc('time')

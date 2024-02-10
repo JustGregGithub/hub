@@ -21,7 +21,7 @@ class SupportController extends Controller
         $user = $request->user();
         $user_categories = [];
 
-        if (!$user->isManagement()) {
+        if (!$user->isOwner()) {
             foreach ($user->getDiscordRoles() as $guildId => $roles) {
                 foreach ($roles as $role) {
                     // Check if there are any categories that match the current guild and role
@@ -60,7 +60,7 @@ class SupportController extends Controller
 
         $user = $request->user();
 
-        if ($user->isManagement()) {
+        if ($user->isOwner()) {
             $user_categories = ApplicationCategory::all();
         } else {
             $discordRoles = $user->getDiscordRoles();

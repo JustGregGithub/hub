@@ -115,7 +115,7 @@
                     {{ __('Your Punishments') }}
                 </h2>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-neutral-700 dark:text-gray-200">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Type
@@ -134,48 +134,48 @@
                     <tbody>
                     @foreach($record['data']['warnRecord'] as $warn)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Warn</span>
                             </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['message'] }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['staff'] }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['date'] }}
                             </td>
                         </tr>
                     @endforeach
                     @foreach($record['data']['kickRecord'] as $warn)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Warn</span>
                             </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['message'] }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['staff'] }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['date'] }}
                             </td>
                         </tr>
                     @endforeach
                     @foreach($record['data']['banRecord'] as $warn)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Warn</span>
                             </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['message'] }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['staff'] }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['date'] }}
                             </td>
                         </tr>
@@ -189,7 +189,7 @@
                     {{ __('Your Achievements') }}
                 </h2>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-neutral-700 dark:text-gray-200">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Type
@@ -208,16 +208,16 @@
                     <tbody>
                     @foreach($record['data']['commendRecord'] as $warn)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Commend</span>
                             </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['message'] }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['staff'] }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                                 {{ $warn['date'] }}
                             </td>
                         </tr>

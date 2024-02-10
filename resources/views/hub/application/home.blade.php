@@ -4,7 +4,7 @@
             <div class="mt-10">
                 <h1 class="text-xl font-bold dark:text-gray-300">My Applications</h1>
                 @foreach($applications as $application)
-                    <div class="bg-white dark:bg-slate-600 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 rounded-xl p-2 mt-4">
                         <div class="p-2 flex justify-between">
                             <div class="flex">
                                 <div class="bg-{{ \App\Models\Hub\Application::statusForeColor($application->status)  }} rounded-md px-2 text-{{ \App\Models\Hub\Application::statusColor($application->status)  }}">{{ \App\Models\Hub\Application::status($application->status) }}</div>
@@ -27,7 +27,7 @@
                     </div>
                 @endforeach
                 @if($applications->isEmpty())
-                    <div class="bg-white dark:bg-slate-600 dark:text-gray-300 rounded-xl p-2 mt-4">
+                    <div class="bg-neutral-800 dark:text-gray-300 rounded-xl p-2 mt-4">
                         <div class="p-2">
                             No Applications Submitted
                         </div>
@@ -37,6 +37,7 @@
             <hr class="h-px my-8 mt-5 mb-5 bg-gray-200 border-0 dark:bg-gray-700">
             <div class="mt-5">
                 <h1 class="text-xl font-bold dark:text-gray-300">Available Applications</h1>
+
                 @foreach ($application_sections as $application_section)
                     @if($application_section->categories->where('is_open', true)->isNotEmpty())
                         <div class="mt-5 rounded-xl p-4"

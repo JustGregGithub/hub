@@ -6,6 +6,7 @@ return [
      */
     'webhook_urls' => [
         'default' => env('DISCORD_NOTIFICATION_WEBHOOK'),
+        'applications' => env('DISCORD_APPLICATIONS_WEBHOOK'),
     ],
 
     /*

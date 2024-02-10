@@ -40,7 +40,7 @@ class ProcessAiInput implements ShouldQueue
 
         //loop through the questions
         foreach($questions as $key => $question) {
-            $request = Http::post('https://cdapi.goom.ai/api/v2/detect/ai_content', [
+            $request = Http::post('https://api.contentdetector.ai/api/v2/detect/ai_content', [
                 'content' => $question,
             ]);
 

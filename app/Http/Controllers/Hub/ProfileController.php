@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hub;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Hub\Ticket;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -48,6 +49,10 @@ class ProfileController extends Controller
     public function post_signature(Request $request) {
         $request->validate([
             'signature' => 'max:150',
+        ]);
+
+        $request->merge([
+            'signature' => strip_tags($request->input('signature'), Ticket::ALLOWED_TAGS)
         ]);
 
         if ($request->user()->signature == $request->input('signature')) {

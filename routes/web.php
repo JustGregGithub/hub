@@ -6,6 +6,7 @@ use App\Http\Controllers\Hub\HomeController;
 use App\Http\Controllers\Hub\ProfileController;
 use App\Http\Controllers\Hub\SupportController;
 use App\Http\Controllers\Hub\TicketsController;
+use App\Http\Controllers\HubController;
 use App\Http\Controllers\Staff\ServerController;
 use App\Http\Controllers\Staff\SettingsController;
 use App\Http\Controllers\Staff\StaffController;
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/home', 302);
-Route::get('/store', function () { return Redirect::to('https://store.lynus.gg'); })->name('store');
+Route::get('/store', function () { return Redirect::to('https://store.rockfordrp.com'); })->name('store');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,36 +38,36 @@ Route::get('/store', function () { return Redirect::to('https://store.lynus.gg')
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
-    Route::middleware('staff')->group(function () {
-        Route::get('/staff',                                           [HomeController::class, 'staff_home'])->name('staff.home');
-
-        Route::get('/staff/server-settings',                           [SettingsController::class, 'servers'])->name('staff.settings.servers');
-        Route::get('/staff/server-settings/{server:id}',               [SettingsController::class, 'server'])->name('staff.settings.server');
-        Route::patch('/staff/server-settings/{server:id}',             [SettingsController::class, 'patch_server'])->name('staff.settings.server.patch');
-        Route::delete('/staff/server-settings/{server:id}',            [SettingsController::class, 'delete_server'])->name('staff.settings.server.delete');
-
-        Route::get('/staff/{server:id}',                               [ServerController::class, 'server'])->name('staff.server');
-        Route::delete('/staff/{server:id}',                            [ServerController::class, 'delete_server'])->name('staff.server.delete');
-        Route::post('/staff/create',                                   [ServerController::class, 'post_server'])->name('staff.server.post');
-
-        Route::get('/staff/{server:id}/search',                        [ServerController::class, 'search'])->name('staff.server.search');
-        Route::get('/staff/{server:id}/players',                       [ServerController::class, 'players'])->name('staff.server.players');
-        Route::get('/staff/{server:id}/players/{player:license}',      [ServerController::class, 'player'])->name('staff.server.player');
-        Route::post('/staff/{server:id}/players/{player:license}',     [ServerController::class, 'post_player'])->name('staff.server.player.post');
-        Route::get('/staff/{server:id}/chats',                         [ServerController::class, 'chats'])->name('staff.server.chats');
-        Route::get('/staff/{server:id}/deaths',                        [ServerController::class, 'deaths'])->name('staff.server.deaths');
-        Route::get('/staff/{server:id}/reports',                       [ServerController::class, 'reports'])->name('staff.server.reports');
-
-        Route::get('/staff/{server:id}/timeclock',                     [StaffController::class, 'timeclock'])->name('staff.server.timeclock');
-
-        Route::get('/staff/{server:id}/permissions',                   [StaffController::class, 'permissions'])->name('staff.permissions');
-        Route::post('/staff/{server:id}/permissions',                  [StaffController::class, 'post_permissions'])->name('staff.permissions.post');
-        Route::delete('/staff/{server:id}/permissions',                [StaffController::class, 'delete_permissions'])->name('staff.permissions.delete');
-        Route::get('/staff/{server:id}/permissions/{role:id}',         [StaffController::class, 'permission'])->name('staff.permission');
-        Route::patch('/staff/{server:id}/permissions/{role:id}',       [StaffController::class, 'patch_permission'])->name('staff.permission.patch');
-    });
-});
+//Route::middleware('auth')->group(function () {
+//    Route::middleware('staff')->group(function () {
+//        Route::get('/staff',                                           [HomeController::class, 'staff_home'])->name('staff.home');
+//
+//        Route::get('/staff/server-settings',                           [SettingsController::class, 'servers'])->name('staff.settings.servers');
+//        Route::get('/staff/server-settings/{server:id}',               [SettingsController::class, 'server'])->name('staff.settings.server');
+//        Route::patch('/staff/server-settings/{server:id}',             [SettingsController::class, 'patch_server'])->name('staff.settings.server.patch');
+//        Route::delete('/staff/server-settings/{server:id}',            [SettingsController::class, 'delete_server'])->name('staff.settings.server.delete');
+//
+//        Route::get('/staff/{server:id}',                               [ServerController::class, 'server'])->name('staff.server');
+//        Route::delete('/staff/{server:id}',                            [ServerController::class, 'delete_server'])->name('staff.server.delete');
+//        Route::post('/staff/create',                                   [ServerController::class, 'post_server'])->name('staff.server.post');
+//
+//        Route::get('/staff/{server:id}/search',                        [ServerController::class, 'search'])->name('staff.server.search');
+//        Route::get('/staff/{server:id}/players',                       [ServerController::class, 'players'])->name('staff.server.players');
+//        Route::get('/staff/{server:id}/players/{player:license}',      [ServerController::class, 'player'])->name('staff.server.player');
+//        Route::post('/staff/{server:id}/players/{player:license}',     [ServerController::class, 'post_player'])->name('staff.server.player.post');
+//        Route::get('/staff/{server:id}/chats',                         [ServerController::class, 'chats'])->name('staff.server.chats');
+//        Route::get('/staff/{server:id}/deaths',                        [ServerController::class, 'deaths'])->name('staff.server.deaths');
+//        Route::get('/staff/{server:id}/reports',                       [ServerController::class, 'reports'])->name('staff.server.reports');
+//
+//        Route::get('/staff/{server:id}/timeclock',                     [StaffController::class, 'timeclock'])->name('staff.server.timeclock');
+//
+//        Route::get('/staff/{server:id}/permissions',                   [StaffController::class, 'permissions'])->name('staff.permissions');
+//        Route::post('/staff/{server:id}/permissions',                  [StaffController::class, 'post_permissions'])->name('staff.permissions.post');
+//        Route::delete('/staff/{server:id}/permissions',                [StaffController::class, 'delete_permissions'])->name('staff.permissions.delete');
+//        Route::get('/staff/{server:id}/permissions/{role:id}',         [StaffController::class, 'permission'])->name('staff.permission');
+//        Route::patch('/staff/{server:id}/permissions/{role:id}',       [StaffController::class, 'patch_permission'])->name('staff.permission.patch');
+//    });
+//});
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/',                                            [TicketsController::class, 'index'])             ->name('tickets.home');
         Route::get('/all/{page}',                                  [TicketsController::class, 'all'])               ->name('tickets.all');
         Route::get('/create',                                      [TicketsController::class, 'create'])            ->name('tickets.create');
-        Route::post('/create',                                     [TicketsController::class, 'post_create'])       ->name('tickets.create.post');
+
+        Route::middleware('throttle:5,60')->group(function () {
+            Route::post('/create',                                     [TicketsController::class, 'post_create'])       ->name('tickets.create.post');
+        });
+
         Route::post('/reply/{ticket:slug}',                        [TicketsController::class, 'post_reply'])        ->name('tickets.reply.post');
         Route::post('/update/{ticket:slug}',                       [TicketsController::class, 'post_update'])       ->name('tickets.update.post');
         Route::patch('/user/{ticket:slug}',                        [TicketsController::class, 'patch_user'])        ->name('tickets.user.patch');
@@ -104,6 +109,11 @@ Route::middleware('auth')->group(function () {
     /**
         Settings
      */
+    Route::prefix('/hub-settings')->group(function () {
+        Route::get('/',                                            [HubController::class, 'index'])              ->name('hub.settings');
+        Route::patch('/announcement',                              [HubController::class, 'patch_announcement']) ->name('hub.settings.announcement.patch');
+    });
+
     Route::prefix('/ticket-settings')->group(function () {
         Route::get('/',                                            [TicketsController::class, 'settings'])          ->name('tickets.settings');
         Route::patch('/category',                                  [TicketsController::class, 'patch_category'])    ->name('tickets.category.patch');
@@ -150,13 +160,9 @@ Route::middleware('auth')->group(function () {
     /**
         Profile
     */
-    Route::get('/profile',                                         [ProfileController::class, 'edit'])              ->name('profile.edit');
+    Route::get('/profile',                                         [ProfileController::class, 'edit'])              ->name('hub.profile.edit');
     Route::post('/profile/signature',                              [ProfileController::class, 'post_signature'])    ->name('profile.signature.post');
 });
-
-
-
-
 
 /*
     Global Api area

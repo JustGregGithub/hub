@@ -479,6 +479,19 @@ class ApplicationController extends Controller
             'status' => Application::STATUSES[Application::DEFAULT_STATUS],
         ]);
 
+        DiscordAlert::to('applications')->message('<@' . $application->user_id . '>', [
+            [
+                'title' => 'Application Update',
+                'description' => 'Your application for ' . $application->category->name . ' has been submitted! Please wait for a response from the respective department',
+                'color' => '#B700DC',
+                'url' => route('applications.view', $application->id),
+                'timestamp' => Carbon::now()->toIso8601String(),
+                'footer' => [
+                    'text' => 'Rockford Hub'
+                ]
+            ]
+        ]);
+
         ProcessAiInput::dispatch($application);
 
         return redirect()->route('applications.home')->with('success', 'Application submitted!');
@@ -529,16 +542,23 @@ class ApplicationController extends Controller
             }
 
             if ($category->add_role) {
-                $request = Http::withHeaders([
-                    'authorization' => env('DISCORD_BOT_AUTHORIZATION')
+                Http::withHeaders([
+                    'Authorization' => env('DISCORD_BOT_AUTHORIZATION')
                 ])->post(env('DISCORD_BOT_URL') . '/api/discord/roles/' . $category->role_guild . '/' . $application->user_id . '/' . $category->role);
+
+                Http::withHeaders([
+                    'Authorization' => env('DISCORD_BOT_AUTHORIZATION'),
+                    'Content-Type' => 'application/json'
+                ])->patch('https://discord.com/api/v8/guilds/' . $category->role_guild . '/members/' . $application->user_id, [
+//                    'roles' => [$category->]
+                ]);
             }
         } else if ($application->status == Application::STATUSES['Under Review']) {
             $message = 'Your application is now under review by <@' . $user->id . '>!';;
             $colour = '#ffff00';
         }
 
-        DiscordAlert::message('<@' . $application->user_id . '>', [
+        DiscordAlert::to('applications')->message('<@' . $application->user_id . '>', [
             [
                 'title' => 'Application Update',
                 'description' => 'Your application for ' . $application->category->name . ' has been ' . Application::status($application->status) . '! ' . $message,
@@ -546,7 +566,7 @@ class ApplicationController extends Controller
                 'url' => route('applications.view', $application->id),
                 'timestamp' => Carbon::now()->toIso8601String(),
                 'footer' => [
-                    'text' => 'Lynus.gg Hub'
+                    'text' => 'Rockford Hub'
                 ]
             ]
         ]);

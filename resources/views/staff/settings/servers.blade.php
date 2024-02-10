@@ -82,16 +82,16 @@
                 <tbody>
                 @foreach($servers as $server)
                     <tr class="bg-zinc-800 text-gray-300 hover:bg-zinc-900 transition">
-                        <td class="px-6 py-4">
+                        <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $server->id }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $server->name }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $server->ip }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="bg-neutral-900 px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $server->port }}
                         </td>
                         <td class="px-6 py-4 flex gap-4">

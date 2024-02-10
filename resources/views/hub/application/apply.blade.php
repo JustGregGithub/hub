@@ -5,7 +5,7 @@
                 <h1 class="text-xl text-gray-400">Applications / <span
                             class="font-bold text-black dark:text-gray-300">{{ $application->name }}</span></h1>
 
-                <div class="mt-5 rounded-xl p-4 bg-white dark:bg-slate-600">
+                <div class="mt-5 rounded-xl p-4 bg-neutral-800">
                     <p class="font-bold text-lg dark:text-gray-300">Application Information</p>
                     <div class="dark:text-gray-400">
                         {!! $application->information !!}
@@ -32,20 +32,20 @@
                                     @case(\App\Models\Hub\ApplicationQuestion::OPTION_TYPES['Input'])
                                         <input
                                                 type="text"
-                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name="questions[{{ $question->id }}]"
                                                 value="{{ old('questions.'.$question->id) }}"
                                         >
                                         @break
                                     @case(\App\Models\Hub\ApplicationQuestion::OPTION_TYPES['Textarea'])
                                         <textarea
-                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name="questions[{{ $question->id }}]"
                                         >{{ old('questions.'.$question->id) }}</textarea>
                                         @break
                                     @case(\App\Models\Hub\ApplicationQuestion::OPTION_TYPES['Select'])
                                         <select
-                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="border border-gray-300 rounded-md text-sm w-full dark:bg-neutral-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name="questions[{{ $question->id }}]"
                                         >
                                             @foreach ($question->options as $key => $value)
