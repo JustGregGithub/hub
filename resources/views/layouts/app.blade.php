@@ -141,13 +141,13 @@
                 @endif
         ">
             <main class="sm:ml-64">
-                    <div class="w-full p-4 bg-green-800 text-center">
-                        <small>
-                            <b>
-                                Our server is  now online. You are now able to access the server! We apologise for all the DDoS attacks.
-                            </b>
-                        </small>
-                    </div>
+{{--                    <div class="w-full p-4 bg-green-800 text-center">--}}
+{{--                        <small>--}}
+{{--                            <b>--}}
+{{--                                Our server is  now online. You are now able to access the server! We apologise for all the DDoS attacks.--}}
+{{--                            </b>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
                 <!-- Page Content -->
                 {{ $slot }}
             </main>
